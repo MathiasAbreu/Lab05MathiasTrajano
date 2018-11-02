@@ -34,8 +34,8 @@ public class Cliente {
 	 * @param email email do cliente
 	 * @param localTrabalho local de trabalho do cliente
 	 * 
-	 * @throws IllegalArgumentException Exceção gerada na tentativa de uma crição de cliente com algum dos dados necessários vazio.
-	 * @throws NullPointerException Exceção gerada na tentativa da criação de um cliente com algum dos dados nulos.
+	 * @throws IllegalArgumentException Exceção gerada na tentativa de uma crição de cliente com um CPF de tamanho inválido!.
+	 * @throws RuntimeException Exceção gerada na tentativa da criação de um cliente com algum dos dados nulos ou inválidos.
 	 * 
 	 */
 	public Cliente(String cpf, String nome, String email, String localTrabalho) {

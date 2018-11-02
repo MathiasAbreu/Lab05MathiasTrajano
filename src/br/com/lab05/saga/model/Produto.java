@@ -1,23 +1,37 @@
-/**
- * 
- */
 package br.com.lab05.saga.model;
 
-/**
- * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
+/** Classe que representa um produto no sistema, contém todos os atributos de um produto, assim como os métodos 
+ * de controle e manipulação de tais dados.
  * 
+ * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
  * 
  */
 public class Produto {
 
+	/**
+	 * Nome do produto
+	 */
 	private String nome;
-	private String descricao;
-	private double preco;
 	
 	/**
-	 * @param nome
-	 * @param descricao
-	 * @param preco
+	 * Descrição do produto
+	 */
+	private String descricao;
+	
+	/**
+	 * Preço do produto
+	 */
+	private double preco;
+	
+	/** Construtor responsável pela construção de um novo objeto do tipo {@link Produto}, contém clausulas de verificação 
+	 * para evitar dados inválidos no momento da criação de um novo produto.
+	 * 
+	 * @param nome nome do produto
+	 * @param descricao descrição do produto
+	 * @param preco preço do produto
+	 * 
+	 * @throws RuntimeException Exceção gerada pela passagem errada de algum dos parâmetros do produto.
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o preço passado para o produto seja negativo ou igual a 0.
 	 */
 	public Produto(String nome, String descricao, double preco) {
 
@@ -34,50 +48,42 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	/**
-	 * @return the nome
+	/** Método que retorna o nome do produto.
+	 * 
+	 * @return O nome do produto.
 	 */
 	public String getNome() {
 		return nome;
 	}
 
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	/**
-	 * @return the descricao
+	/**Método que retorna a descrição do produto.
+	 * 
+	 * @return A descrição do produto.
 	 */
 	public String getDescricao() {
 		return descricao;
 	}
 
-	/**
-	 * @param descricao the descricao to set
-	 */
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	/**
-	 * @return the preco
+	/**Método que retorna o preço do produto.
+	 * 
+	 * @return O preço do produto.
 	 */
 	public double getPreco() {
 		return preco;
 	}
 
-	/**
-	 * @param preco the preco to set
+	/** Método que altera o preço do produto.
+	 * 
+	 * @param preco novo preço do produto.
 	 */
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
+	/**
+	 * Método que transforma um Produto em uma representação em inteiro.
+	 * 
+	 * @return Retorna um número inteiro representando um Produto.
 	 */
 	@Override
 	public int hashCode() {
@@ -88,8 +94,12 @@ public class Produto {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
+	/**
+	 * Método que verifica se dois produtos são iguais ou não.
+	 * 
+	 * @param obj Qualquer objeto que possa ser comparado com um produto.
+	 * 
+	 * @return Retorna um valor booleando representando a igualdade ou não de dois produtos.
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -104,8 +114,10 @@ public class Produto {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * Método responsável pela impressão dos dados de um produto.
+	 * 
+	 * @return Retorna uma representação de um produto.
 	 */
 	@Override
 	public String toString() {

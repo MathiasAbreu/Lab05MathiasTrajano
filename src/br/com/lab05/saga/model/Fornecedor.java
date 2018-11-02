@@ -100,6 +100,38 @@ public class Fornecedor {
 		this.telefone = telefone;
 	}
 
+	/** Método que transforma o fornecedor em uma representação em inteiro.
+	 * 
+	 * @return Retorna um inteiro representando o fornecedor.
+	 */
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	/** Método que verifica se dois fornecedores são iguais.
+	 * 
+	 * @param obj um objeto qualquer para ser comparado.
+	 * 
+	 * @return Retorna um booleando confirmando ou não a igualdade entre fornecedores.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(getClass() == obj.getClass()) {
+			
+			Fornecedor other = (Fornecedor) obj;
+			if(this.nome.equals(other.getNome())) {
+				
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	/**
 	 * Método que retorna a representação textual do Fornecedor.
 	 * 
@@ -110,6 +142,18 @@ public class Fornecedor {
 		return  nome + " - " + email + " - " + telefone;
 	}
 
+	/**
+	 * Método que adiciona um novo produto para tal fornecedor.
+	 * 
+	 * @param nomeProduto nome do produto
+	 * @param descricao descrição do produto
+	 * @param preco preço do produto
+	 * 
+	 * @return Retorna uma confirmação caso o produto seja cadastrado com sucesso.
+	 * 
+	 * @throws RuntimeException Gera essa exceção caso o produto já exista para tal fornecedor.
+	 * 
+	 */
 	public String adicionarProduto(String nomeProduto, String descricao, double preco) throws RuntimeException {
 		
 		if(produtos.contains(new Produto(nomeProduto,descricao,preco))) 
@@ -176,11 +220,17 @@ public class Fornecedor {
 		throw new NullPointerException("Erro na exibicao de produto: produto nao existe.");
 	}
 
-	/**
-	 * @param nome2
-	 * @param descricao
-	 * @param novoPreco
-	 * @return
+	/** Método que edita algum produto recebendo como parâmetros o nome e descrição do produto desejada e o novo preço, 
+	 * pois esse é o unico dado que se permite alterar.
+	 * 
+	 * @param nomeProduto nome do produto
+	 * @param descricao descricao do produto
+	 * @param novoPreco novo preço do produto
+	 * 
+	 * @return Retorna uma confirmação da edição do cliente
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso algum dos prametros passados seja nulo ou vazio.
+	 * 
 	 */
 	public String editarProduto(String nomeProduto, String descricao, double novoPreco) {
 		
@@ -203,8 +253,11 @@ public class Fornecedor {
 		return "Produto editado!";
 	}
 
-	/**
-	 * @return
+	/** Método que lista todos os produtos do fornecedor em ordem alfabética.
+	 * 
+	 * @return Retorna uma String com as representações de todo so produtos do fornecedor.
+	 * 
+	 * @throws NullPointerException Gera essa exceção caso não exista produtos cadastrados.
 	 */
 	public String listarProdutos() {
 		
@@ -226,9 +279,16 @@ public class Fornecedor {
 	}
 
 	/**
-	 * @param descricao 
-	 * @param nomeProduto 
-	 * @return
+	 * Método que remove um produto que esteja cadastrado.
+	 * 
+	 * @param nomeProduto nome do produto
+	 * @param descricao descrição do produto
+	 * 
+	 * @return Retorna uma mensagem de confirmação da exclusão de tal produto.
+	 * 
+	 * @throws IllegalArgumentException Gera essa exceção caso algum dos parâmetros seja vazio ou nulo.
+	 * 
+	 * @throws NullPointerException Gera essa exceção caso o produto não seja encontrado no sistema.
 	 */
 	public String removerProduto(String nomeProduto, String descricao) {
 
