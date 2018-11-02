@@ -113,6 +113,16 @@ public class SagaFacade {
 		return controleFornecedor.buscarProduto(nome,descricao,fornecedor);
 	}
 	
+	public String exibeProdutosFornecedor(String fornecedor) {
+		
+		return controleFornecedor.exibirProdutos(fornecedor);
+	}
+	
+	public String exibeProdutos() {
+		
+		return controleFornecedor.exibirProdutos();
+	}
+	
 	/**
 	 * Método que retorna todos os clientes cadastrados no sistema, em ordem alfabética.
 	 * 
@@ -191,6 +201,11 @@ public class SagaFacade {
 	public String removeFornecedor(String nome) {
 		
 		return controleFornecedor.removerFornecedor(nome);
+	}
+	
+	public String removeProduto(String nome,String descricao,String fornecedor) {
+		
+		return controleFornecedor.removerProduto(nome,descricao,fornecedor);
 	}
 	
 	public static void main(String[] args) {

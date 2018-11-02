@@ -1,6 +1,7 @@
 package br.com.lab05.saga.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /** Representação de um fornecedor, possui como dados essenciais o nome, email e telefone dos fornecedores, 
  * como também todos os produtos que são comercializados pelos mesmos.
@@ -120,6 +121,15 @@ public class Fornecedor {
 		}		
 	}
 	
+	/**
+	 * Método que verifica se há algum produto do fornecedor.
+	 * 
+	 * @param nomeProduto nome do produto
+	 * @param descricao descricao do produto
+	 * 
+	 * @return Retorna um valor verificando a existência ou não de certo produto.
+	 * 
+	 */
 	private boolean verificaExistencia(String nomeProduto,String descricao) {
 		
 		for (Produto produto : produtos) {
@@ -133,6 +143,19 @@ public class Fornecedor {
 		return false;
 	}
 
+	/**
+	 * Método que busca se há determinado produto cadastrado em um fornecedor.
+	 * 
+	 * @param nomeProduto nome do produto
+	 * @param descricao descricao do produto
+	 * 
+	 * @return Retorna um determinado {@link Produto} de um fornecedor, se o mesmo existir.
+	 * 
+	 * @throws IllegalArgumentException Gera uma exceção caso algum dos parâmetros seja nulo ou vazio, finalizando assim
+	 * o método.
+	 * 
+	 * @throws NullPointerException Essa excessão é gerada caso o produto não seja encontrado, indicando assim que o produto não existe.
+	 */
 	public Produto buscarProduto(String nomeProduto, String descricao) {
 		
 		if(nomeProduto.trim().isEmpty())
@@ -178,6 +201,52 @@ public class Fornecedor {
 		produtos.add(produto);
 		
 		return "Produto editado!";
+	}
+
+	/**
+	 * @return
+	 */
+	public String listarProdutos() {
+		
+		if(produtos.size() == 0) {
+			throw new NullPointerException("Não há produtos cadastrados!");
+		}
+		
+		ProdutoComparator comparador = new ProdutoComparator();
+		Collections.sort(produtos,comparador);
+		
+		String retorno = nome + " - " + produtos.get(0).toString();
+		
+		for (int i = 1; i < produtos.size(); i++) {
+			
+			retorno += " | " + nome + " - " + produtos.get(i).toString();
+		}
+		
+		return retorno;
+	}
+
+	/**
+	 * @param descricao 
+	 * @param nomeProduto 
+	 * @return
+	 */
+	public String removerProduto(String nomeProduto, String descricao) {
+
+		if(nomeProduto == null || nomeProduto.trim().isEmpty())
+			throw new IllegalArgumentException("Erro na remocao de produto: nome nao pode ser vazio ou nulo.");
+		if(descricao == null || descricao.trim().isEmpty())
+			throw new IllegalArgumentException("Erro na remocao de produto: descricao nao pode ser vazia ou nula.");
+		
+		for (int i = 0; i < produtos.size(); i++) {
+			
+			if(produtos.get(i).getNome().equals(nomeProduto) && produtos.get(i).getDescricao().equals(descricao)) {
+				
+				produtos.remove(i);
+				return "Produto removido com sucesso!";
+			}
+		}
+		
+		throw new NullPointerException("Erro na remocao de produto: produto nao existe.");
 	}
 	
 }

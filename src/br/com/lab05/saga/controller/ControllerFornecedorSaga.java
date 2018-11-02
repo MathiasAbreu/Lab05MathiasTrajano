@@ -223,4 +223,57 @@ public class ControllerFornecedorSaga {
 		else
 			throw new NullPointerException("Erro na edicao de produto: fornecedor nao existe.");
 	}
+
+	public String exibirProdutos(String fornecedor) {
+
+		if(fornecedores.containsKey(fornecedor)) {
+			
+			return fornecedores.get(fornecedor).listarProdutos();
+		}
+		
+		throw new NullPointerException();
+	}
+	
+	public String exibirProdutos() {
+		
+		Set<String> chaves = fornecedores.keySet();
+		ArrayList<Fornecedor> fornecedors = new ArrayList<>();
+		
+		for (String chave : chaves) {
+			
+			fornecedors.add(fornecedores.get(chave));
+		}
+		
+		FornecedorComparator<?> comparador = new FornecedorComparator<>();
+		Collections.sort(fornecedors,comparador);
+		
+		String retorno = fornecedors.get(0).listarProdutos();
+		
+		for(int i = 1;i < fornecedors.size();i++) {
+			
+			retorno += " | " + fornecedors.get(i).listarProdutos();
+		}
+		
+		return retorno;
+	}
+
+	/**
+	 * @param nome
+	 * @param descricao
+	 * @param fornecedor
+	 * @return
+	 */
+	public String removerProduto(String nome, String descricao, String fornecedor) {
+		
+		if(fornecedor == null || fornecedor.trim().isEmpty()) {
+			throw new IllegalArgumentException("Erro na remocao de produto: fornecedor nao pode ser vazio ou nulo.");
+		}
+		
+		if(fornecedores.containsKey(fornecedor)) {
+			
+			return fornecedores.get(fornecedor).removerProduto(nome,descricao);
+		}
+		
+		throw new NullPointerException("Erro na remocao de produto: fornecedor nao existe.");
+	}
 }
