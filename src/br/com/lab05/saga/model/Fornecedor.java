@@ -1,0 +1,183 @@
+package br.com.lab05.saga.model;
+
+import java.util.ArrayList;
+
+/** Representação de um fornecedor, possui como dados essenciais o nome, email e telefone dos fornecedores, 
+ * como também todos os produtos que são comercializados pelos mesmos.
+ * 
+ * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
+ */
+public class Fornecedor {
+
+	/**
+	 * Nome do fornecedor.
+	 */
+	private String nome;
+	
+	/**
+	 * Email do fornecedor.
+	 */
+	private String email;
+	
+	/**
+	 * Telefone do fornecedor.
+	 */
+	private String telefone;
+	
+	/**
+	 * Coleção que armazena todos os produtos do fornecedor.
+	 */
+	private ArrayList<Produto> produtos;
+
+	/**
+	 * Construtor que instancia um novo fornecedor já recebendo seus dados principais. Caso algum dos 
+	 * parametros seja inválido, o mesmo não gera um novo fornecedor.
+	 * 
+	 * @param nome nome do fornecedor
+	 * @param email email do fornecedor
+	 * @param telefone telefone do fornecedor
+	 * 
+	 * @throws NullPointerException Caso algum dos dados seja null, o construtor gera uma exceção impe
+	 * dindo que um fornecedor inválido seja criado!
+	 * 
+	 * @throws IllegalArgumentException Caso algum dos dados esteja vazio, o construtor gera uma exceção 
+	 * impedindo que um fornecedor inválido seja criado!
+	 */
+	public Fornecedor(String nome, String email, String telefone) {
+
+		if(nome == null || nome.trim().isEmpty())
+			throw new RuntimeException("Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.");
+		if(email == null || email.trim().isEmpty())
+			throw new RuntimeException("Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.");
+		if(telefone == null || telefone.trim().isEmpty())
+			throw new RuntimeException("Erro no cadastro do fornecedor: telefone nao pode ser vazio ou nulo.");
+		
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		
+		produtos = new ArrayList<>();
+	}
+
+	/** Método que retorna o nome do fornecedor.
+	 * 
+	 * @return O nome do fornecedor.
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/** Método que retorna o email do fornecedor.
+	 * 
+	 * @return O email do fornecedor.
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/** Método que altera o email do fornecedor.
+	 * 
+	 * @param email O novo email do fornecedor.
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/** Método que retorna o telefone do fornecedor.
+	 * 
+	 * @return o telefone do fornecedor.
+	 */
+	public String getTelefone() {
+		return telefone;
+	}
+
+	/** Método que altera o telefone do fornecedor.
+	 * 
+	 * @param telefone O novo telefone do fornecedor.
+	 */
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	/**
+	 * Método que retorna a representação textual do Fornecedor.
+	 * 
+	 * @return Representação textual de um fornecedor.
+	 */
+	@Override
+	public String toString() {
+		return  nome + " - " + email + " - " + telefone;
+	}
+
+	public String adicionarProduto(String nomeProduto, String descricao, double preco) throws RuntimeException {
+		
+		if(produtos.contains(new Produto(nomeProduto,descricao,preco))) 
+			throw new RuntimeException("Erro no cadastro de produto: produto ja existe.");
+		else {
+			
+			produtos.add(new Produto(nomeProduto,descricao,preco));
+			return "Produto cadastrado com sucesso!";
+		}		
+	}
+	
+	private boolean verificaExistencia(String nomeProduto,String descricao) {
+		
+		for (Produto produto : produtos) {
+			
+			if(produto.equals(new Produto(nomeProduto,descricao,1))) {
+				
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public Produto buscarProduto(String nomeProduto, String descricao) {
+		
+		if(nomeProduto.trim().isEmpty())
+			throw new IllegalArgumentException("Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
+		if(descricao.trim().isEmpty())
+			throw new IllegalArgumentException("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
+		
+		if(verificaExistencia(nomeProduto,descricao)) {
+			
+			for (Produto produto : produtos) {
+				
+				if(produto.getNome().equals(nomeProduto) && produto.getDescricao().equals(descricao))
+					return produto;
+			}
+			
+		}
+		
+		throw new NullPointerException("Erro na exibicao de produto: produto nao existe.");
+	}
+
+	/**
+	 * @param nome2
+	 * @param descricao
+	 * @param novoPreco
+	 * @return
+	 */
+	public String editarProduto(String nomeProduto, String descricao, double novoPreco) {
+		
+		if(nomeProduto.trim().isEmpty()) {
+			throw new IllegalArgumentException("Erro na edicao de produto: nome nao pode ser vazio ou nulo.");
+		}
+		if(descricao.trim().isEmpty()) {
+			throw new IllegalArgumentException("Erro na edicao de produto: descricao nao pode ser vazia ou nula.");
+		}
+		if(novoPreco < 0) {
+			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
+		}
+		
+		Produto produto = buscarProduto(nomeProduto, descricao);
+		produtos.remove(produto);
+		
+		produto.setPreco(novoPreco);
+		produtos.add(produto);
+		
+		return "Produto editado!";
+	}
+	
+}

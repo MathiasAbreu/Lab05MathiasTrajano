@@ -1,0 +1,201 @@
+package br.com.lab05.saga.facade;
+
+import br.com.lab05.saga.controller.ControllerClienteSaga;
+import br.com.lab05.saga.controller.ControllerFornecedorSaga;
+import br.com.lab05.saga.model.Cliente;
+import br.com.lab05.saga.model.Fornecedor;
+import easyaccept.EasyAccept;
+
+/**Representação da classe de fachada do cliente.
+ * 
+ * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
+ * 
+ */
+public class SagaFacade {
+
+	/**
+	 * Instância da classe de controle de clientes.
+	 */
+	private ControllerClienteSaga controleCliente;
+	
+	/**
+	 * Instância da classe de controle de fornecedores.
+	 */
+	private ControllerFornecedorSaga controleFornecedor;
+	
+	/**
+	 * Construtor que inicia a classe e instancia o controle de clientes.
+	 */
+	public SagaFacade() {
+		
+		controleCliente = new ControllerClienteSaga();
+		controleFornecedor = new ControllerFornecedorSaga();
+	}
+	
+	/**
+	 * Método que cadastra um novo {@link Cliente}.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param nome nome do cliente
+	 * @param email email do cliente
+	 * @param localTrabalho local de trabalho do cliente
+	 * 
+	 * @return Retorna mensagem de confimação ou não do cadastro do novo cliente.
+	 * 
+	 * @throws RuntimeException Este método recebe exceções que podem ser ocasionadas nas classes de controle e de cliente.
+	 */
+	public String adicionaCliente(String cpf,String nome,String email,String localizacao) throws RuntimeException {
+		
+		return controleCliente.cadastrarCliente(cpf, nome, email, localizacao);
+	}
+	
+	/**
+	 * Método que cadastra um novo {@link Fornecedor}.
+	 * 
+	 * @param nome nome do fornecedor
+	 * @param email email do fornecedor
+	 * @param telefone telefone do fornecedor
+	 * 
+	 * @return Retorna uma mensagem de confirmação da operação.
+	 * 
+	 * @throws RuntimeException Pode gerar várias exceções, desde a criação do novo fornecedor, até o momento 
+	 * de sua inserção no sistema de armazenamento do sistema. Todas podem ser tratadas utilizando sua classe 
+	 * mãe {@link RuntimeException}.
+	 */
+	public String adicionaFornecedor(String nome,String email, String telefone) throws RuntimeException {
+		
+		return controleFornecedor.adicionarFornecedor(nome, email, telefone);
+	}
+	
+	/**
+	 * 
+	 * @param fornecedor
+	 * @param nome
+	 * @param descricao
+	 * @param preco
+	 * @return
+	 * @throws RuntimeException
+	 */
+	public String adicionaProduto(String fornecedor,String nome,String descricao,double preco) throws RuntimeException{
+		
+		return controleFornecedor.adicionarProduto(fornecedor,nome,descricao,preco);
+	}
+	
+	/**
+	 * Método que busca algum cliente no sistema.
+	 * 
+	 * @param cpf cpf do cliente
+	 * 
+	 * @return Retorna o cliente ou uma mensagem de erro na operação.
+	 */
+	public String exibeCliente(String cpf) {
+		
+		return controleCliente.buscarCliente(cpf);
+	}
+	
+	/**
+	 * Método que busca algum fornecedor no sistema.
+	 * 
+	 * @param nome nome do fornecedor
+	 * 
+	 * @return Retorna uma representação do fornecedor.
+	 * 
+	 * @throws RuntimeException Essa exceção é gerada caso haja a tentativa de busca de um fornece
+	 * dor inexistente no sistema.
+	 */
+	public String exibeFornecedor(String nome) throws RuntimeException {
+		
+		return controleFornecedor.buscarFornecedor(nome);
+	}
+	
+	public String exibeProduto(String nome,String descricao, String fornecedor) {
+		
+		return controleFornecedor.buscarProduto(nome,descricao,fornecedor);
+	}
+	
+	/**
+	 * Método que retorna todos os clientes cadastrados no sistema, em ordem alfabética.
+	 * 
+	 * @return Retorna todos os clientes do sistema.
+	 */
+	public String exibeClientes() {
+		
+		return controleCliente.listarClientes();
+	}
+	
+	public String exibeFornecedores() {
+		
+		return controleFornecedor.listarFornecedores();
+	}
+	
+	/**
+	 * Método que edita dados de um certo cliente.
+	 * 
+	 * @param cpf cpf do cliente a ser editado
+	 * @param novoDado novo dado 
+	 * @param valor valor de representação do dado a ser editado
+	 * 
+	 * @return Retorna um mensagem de exito do processo de edição do cliente.
+	 * 
+	 * @throws RuntimeException Este método pode receber exceções advindos das classes de controle e cliente.
+	 */
+	public void editaCliente(String cpf,String atributo,String novoValor) throws RuntimeException {
+		
+		controleCliente.editarCliente(cpf,atributo,novoValor);
+	}
+	
+	/**
+	 * Método que edita dados de um certo fornecedor.
+	 * 
+	 * @param nome nome do fornecedor a ser editado
+	 * @param novoDado novo dado
+	 * @param valor valor de representação do dado a ser editado
+	 * 
+	 * @return Retorna uma mensagem de êxito do processo de edição do fornecedor.
+	 * 
+	 * @throws RuntimeException Este método pode receber exceções advindas das classes {@link ControllerFornecedorSaga} e {@link Fornecedor}.
+	 */
+	public String editaFornecedor(String nome,String atributo,String novoValor) throws RuntimeException {
+		
+		return controleFornecedor.editarFornecedor(nome, atributo, novoValor);
+	}
+	
+	public String editaProduto(String nome, String descricao, String fornecedor, double novoPreco) {
+		
+		return controleFornecedor.editarProduto(nome,descricao,fornecedor,novoPreco);
+	}
+	
+	/**
+	 * Método que remove determinado cliente do sistema.
+	 * 
+	 * @param cpf cpf do cliente a ser removido
+	 * 
+	 * @return Mensagem de confirmação ou não da remoção do cliente.
+	 * 
+	 * @throws NullPointerException Erro gerado caso houver uma tentativa de remover um cliente que não exista no sistema.
+	 */
+	public String removeCliente(String cpf) {
+		
+		return controleCliente.removerCliente(cpf);
+	}
+	
+	/**
+	 * Método que remove determinado fornecedor do sistema.
+	 * 
+	 * @param nome nome do fornecedor a ser removido
+	 * 
+	 * @return Mensagem de confirmação ou não da remoção do cliente.
+	 * 
+	 * @throws NullPointerException Erro gerado caso houver uma tentativa de remover um fornecedor que não exista no sistema.
+	 */
+	public String removeFornecedor(String nome) {
+		
+		return controleFornecedor.removerFornecedor(nome);
+	}
+	
+	public static void main(String[] args) {
+		
+		args = new String[] {"br.com.lab05.saga.facade.SagaFacade","src/br/com/lab05/saga/easyAccept/use_case_1.txt","src/br/com/lab05/saga/easyAccept/use_case_2.txt","src/br/com/lab05/saga/easyAccept/use_case_3.txt"};
+		EasyAccept.main(args);
+	}
+}
