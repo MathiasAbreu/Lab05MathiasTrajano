@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import br.com.lab05.saga.comparators.ClienteComparator;
 import br.com.lab05.saga.model.Cliente;
-import br.com.lab05.saga.model.ClienteComparator;
 
 /**
  * Representação do controle de clientes, esta classe possui a coleção responsável pelo armazenamento 

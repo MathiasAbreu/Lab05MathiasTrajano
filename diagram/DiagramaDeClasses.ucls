@@ -11,8 +11,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="br.com.lab05.saga.model.FornecedorComparator" project="Lab05MathiasTrajano" 
-    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/FornecedorComparator.java" binary="false" 
+  <class id="2" language="java" name="br.com.lab05.saga.comparators.FornecedorComparator" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/comparators/FornecedorComparator.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="97" width="204" x="266" y="75"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -40,8 +40,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="br.com.lab05.saga.model.ClienteComparator" project="Lab05MathiasTrajano" 
-    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/ClienteComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="br.com.lab05.saga.comparators.ClienteComparator" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/comparators/ClienteComparator.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="97" width="159" x="817" y="75"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -49,8 +50,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="br.com.lab05.saga.model.ProdutoComparator" project="Lab05MathiasTrajano" 
-    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/ProdutoComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="br.com.lab05.saga.comparators.ProdutoComparator" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/comparators/ProdutoComparator.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="97" width="169" x="1016" y="75"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -88,43 +90,63 @@
     </display>  
   </class>  
   <association id="10">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="11" name="fornecedores"/>      
-      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="13">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="14" name="clientes"/>      
-      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
+      <attribute id="11" name="clientes">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="16">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="17" name="produtos"/>      
-      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="19">    
+  <association id="13">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="20" name="controleCliente"/>      
-      <multiplicity id="21" minimum="0" maximum="1"/>    
+      <attribute id="14" name="controleCliente">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="22">    
+  <association id="16">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="23" name="controleFornecedor"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
+      <attribute id="17" name="controleFornecedor">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="20" name="produtos">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="23" name="fornecedores">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

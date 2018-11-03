@@ -3,6 +3,8 @@ package br.com.lab05.saga.model;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import br.com.lab05.saga.comparators.ProdutoComparator;
+
 /** Representação de um fornecedor, possui como dados essenciais o nome, email e telefone dos fornecedores, 
  * como também todos os produtos que são comercializados pelos mesmos.
  * 

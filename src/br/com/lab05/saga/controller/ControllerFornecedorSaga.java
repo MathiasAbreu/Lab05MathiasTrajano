@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import br.com.lab05.saga.comparators.FornecedorComparator;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
-import br.com.lab05.saga.model.FornecedorComparator;
 import br.com.lab05.saga.model.Produto;
 
 /**
@@ -89,7 +89,7 @@ public class ControllerFornecedorSaga {
 			fornecedors.add(fornecedores.get(chave));
 		}
 		
-		FornecedorComparator<?> comparador = new FornecedorComparator();
+		FornecedorComparator comparador = new FornecedorComparator();
 		Collections.sort(fornecedors,comparador);
 		
 		String retorno = fornecedors.get(0).toString();
@@ -286,7 +286,7 @@ public class ControllerFornecedorSaga {
 			fornecedors.add(fornecedores.get(chave));
 		}
 		
-		FornecedorComparator<?> comparador = new FornecedorComparator<>();
+		FornecedorComparator comparador = new FornecedorComparator();
 		Collections.sort(fornecedors,comparador);
 		
 		String retorno = fornecedors.get(0).listarProdutos();

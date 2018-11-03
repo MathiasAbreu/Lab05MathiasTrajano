@@ -1,4 +1,4 @@
-package br.com.lab05.saga.tests;
+package br.com.lab05.saga.tests.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 

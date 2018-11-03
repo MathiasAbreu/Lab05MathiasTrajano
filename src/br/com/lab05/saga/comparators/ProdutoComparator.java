@@ -1,9 +1,11 @@
 /**
  * 
  */
-package br.com.lab05.saga.model;
+package br.com.lab05.saga.comparators;
 
 import java.util.Comparator;
+
+import br.com.lab05.saga.model.Produto;
 
 /** Classe utilizada para comparar objetos do tipo {@link Produto} com função principal de ordenar os produtos no momento 
  * da impressão dos mesmos em alguns métodos.

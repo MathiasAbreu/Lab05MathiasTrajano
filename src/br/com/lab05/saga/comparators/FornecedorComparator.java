@@ -1,6 +1,8 @@
-package br.com.lab05.saga.model;
+package br.com.lab05.saga.comparators;
 
 import java.util.Comparator;
+
+import br.com.lab05.saga.model.Fornecedor;
 
 /**
  * Classe utilizada para comparar objetos do tipo {@link Fornecedor} com função principal de ordenar os fornecedores no momento 
@@ -10,7 +12,7 @@ import java.util.Comparator;
  * 
  *
  */
-public class FornecedorComparator<T> implements Comparator<Fornecedor> {
+public class FornecedorComparator implements Comparator<Fornecedor> {
 
 	/**
 	 * Método com a função de comparar dois fornecedores para saber qual deve vir primeiro na ordem alfabética. O método 
