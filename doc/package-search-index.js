@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"br.com.lab05.saga.controller"},{"l":"br.com.lab05.saga.facade"},{"l":"br.com.lab05.saga.model"}]
+packageSearchIndex = [{"l":"br.com.lab05.saga.controller"},{"l":"br.com.lab05.saga.model"}]

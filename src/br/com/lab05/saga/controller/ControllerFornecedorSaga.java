@@ -5,8 +5,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
 import br.com.lab05.saga.model.FornecedorComparator;
+import br.com.lab05.saga.model.Produto;
 
 /**
  * Representação do controle de fornecedores, onde se encontra todos os metodos de controle e modelagem, 
@@ -38,13 +40,13 @@ public class ControllerFornecedorSaga {
 	 * @param email email do fornecedor
 	 * @param telefone telefone do fornecedor
 	 * 
-	 * @return Retorna uma mensagem com o sucesso da operação.
+	 * @return Retorna o nome do {@link Fornecedor} recém cadastrado.
 	 * 
 	 * @throws RuntimeException Gera uma exceção caso haja tentativa de cadastrar um fornecedor que já exista, 
 	 * como também repassa exceções do tipo {@link NullPointerException} ou do tipo {@link IllegalArgumentException} 
 	 * que podem ser geradas no momento da criação do objeto do tipo {@link Fornecedor}.
 	 */
-	public String adicionarFornecedor(String nome,String email,String telefone) throws RuntimeException {
+	public String adicionarFornecedor(String nome,String email,String telefone) {
 		
 		if(!fornecedores.containsKey(nome)) {
 			
@@ -61,6 +63,8 @@ public class ControllerFornecedorSaga {
 	 * @param nome nome do fornecedor
 	 * 
 	 * @return Retorna uma representação do {@link Fornecedor}.
+	 * 
+	 * @throws NullPointerException Gera essa exceção caso o fornecedor não seja encontrado.
 	 */
 	public String buscarFornecedor(String nome) {
 		
@@ -74,9 +78,8 @@ public class ControllerFornecedorSaga {
 	 * 
 	 * @return Retorna uma representação de todos os clientes em ordem alfabética.
 	 * 
-	 * @throws RuntimeException Gera um erro caso não haja fornecedores cadastrados.
 	 */
-	public String listarFornecedores() throws NullPointerException{
+	public String listarFornecedores() {
 		
 		Set<String> chaves = fornecedores.keySet();
 		ArrayList<Fornecedor> fornecedors = new ArrayList<>();
@@ -104,16 +107,17 @@ public class ControllerFornecedorSaga {
 	 * fornecedor não cadastrado, são geradas exceções.
 	 * 
 	 * @param nome nome do fornecedor a ser editado
-	 * @param novoDado novo dado a ser alterado
-	 * @param valor novo valor do dado a ser alterado
+	 * @param atributo novo dado a ser alterado
+	 * @param novoDado novo valor do dado a ser alterado
 	 * 
-	 * @return Retorna uma confirmação ou não do sucesso da edição do {@link Fornecedor}.
+	 * @return Retorna uma confirmação da edição do {@link Fornecedor}.
 	 * 
 	 * @throws NullPointerException Caso tentem editar algum dado de um fornecedor que não esteja cadastrado,
 	 * esta exceção é gerada.
 	 * 
-	 * @throws IllegalArgumentException Caso tentem editar algum dado inexistente em um cliente, esta 
-	 * exceção é gerada!
+	 * @throws IllegalArgumentException Caso tentem editar algum dado inexistente em um cliente, ou algum
+	 * dos parâmetros passados sejam nulos ou vazios, está exceção é gerada.
+	 * 
 	 */
 	public String editarFornecedor(String nome, String atributo,String novoDado) {
 	
@@ -151,7 +155,7 @@ public class ControllerFornecedorSaga {
 	 * 
 	 * @param nome nome do fornecedor a ser removido.
 	 * 
-	 * @return Retorna uma mensagem de confirmação ou não da exclusão de algum fornecedor.
+	 * @return Retorna o nome do {@link Fornecedor} recém removido.
 	 * 
 	 * @throws NullPointerException Caso o fornecedor não esteja cadastrado no sistema, um erro é gerado pois não há como excluir um 
 	 * fornecedor não cadastrado!
@@ -169,16 +173,22 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Impossível remover um cliente que não estava cadastrado!");
 	}
 
-	/**
+	/** Método responsável pelo cadastramento de um novo produto no sistema. Ele recebe todo os dados do novo produto
+	 * assim como o fornecedor de tal {@linkplain Produto}. Caso algum dos dados seja inválido, ou o fornecedor em questão 
+	 * não exista, exceções são geradas.
 	 * 
-	 * @param fornecedor
-	 * @param nome
-	 * @param descricao
-	 * @param preco
-	 * @return
-	 * @throws RuntimeException
+	 * @param fornecedor nome do fornecedor do produto.
+	 * @param nome nome do produto
+	 * @param descricao descrição do produto
+	 * @param preco preço do produto
+	 * 
+	 * @return Repassa o retorno vindo do método de cadastro da classe {@link Fornecedor}.
+	 * 
+	 * @throws IllegalArgumentException Exceção gerada caso o nome do fornecedor seja vazio ou nulo.
+	 * @throws NullPointerException Exceção gerada caso o fornecedor não seja encontrado.
+	 * 
 	 */
-	public String adicionarProduto(String fornecedor,String nome, String descricao, double preco) throws RuntimeException {
+	public String adicionarProduto(String fornecedor,String nome, String descricao, double preco) {
 		
 		if(fornecedor.trim().isEmpty())
 			throw new IllegalArgumentException("Erro no cadastro de produto: fornecedor nao pode ser vazio ou nulo.");
@@ -191,6 +201,19 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro no cadastro de produto: fornecedor nao existe.");
 	}
 
+	/**
+	 * Método que busca determinado produto de determinado fornecedor. Este método pode gerar exceções advindas da passagem 
+	 * inválida dos parâmetros.
+	 * 
+	 * @param nome nome do produto a ser buscado
+	 * @param descricao descrição do produto a ser buscado
+	 * @param fornecedor fornecedor de tal produto
+	 * 
+	 * @return Retorna a representação, em String, do produto.
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o nome do fornecedor seja vazio ou nulo.
+	 * @throws NullPointerException Essa exceção é gerada caso o fornecedor de tal produto não seja encontrado.
+	 */
 	public String buscarProduto(String nome, String descricao, String fornecedor) {
 		
 		if(fornecedor.trim().isEmpty())
@@ -204,12 +227,17 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro na exibicao de produto: fornecedor nao existe.");
 	}
 
-	/**
-	 * @param nome
-	 * @param descricao
-	 * @param fornecedor
-	 * @param novoPreco
-	 * @return
+	/** Método responsável pela edição de determinado produto de um determinado fornecedor.
+	 * 
+	 * @param nome nome do produto a ser editado.
+	 * @param descricao descricao do produto a ser editado.
+	 * @param fornecedor fornecedor do produto
+	 * @param novoPreco novo preço do produto
+	 * 
+	 * @return Repassa o retorno advindo do metodo de edição do produto na classe {@linkplain Cliente}.
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o nome do fornecedor seja vazio ou nulo.
+	 * @throws NullPointerException Essa exceção é gerada caso o fornecedor de tal produto não seja encontrado.
 	 */
 	public String editarProduto(String nome, String descricao, String fornecedor, double novoPreco) {
 		
@@ -224,6 +252,15 @@ public class ControllerFornecedorSaga {
 			throw new NullPointerException("Erro na edicao de produto: fornecedor nao existe.");
 	}
 
+	/**
+	 * Método que lista todo os produtos de um determinado fornecedor, em ordem alfabética.
+	 * 
+	 * @param fornecedor produtos do fornecedor a ser retornado
+	 * 
+	 * @return Retorna uma representação de todos os produtos de um fornecedor, ordenados alfabeticamente.não ex
+	 * 
+	 * @throws NullPointerException Esta exceção é gerada caso o fornecedor não seja encontrado.
+	 */
 	public String exibirProdutos(String fornecedor) {
 
 		if(fornecedores.containsKey(fornecedor)) {
@@ -231,9 +268,14 @@ public class ControllerFornecedorSaga {
 			return fornecedores.get(fornecedor).listarProdutos();
 		}
 		
-		throw new NullPointerException();
+		throw new NullPointerException("Fornecedor não encontrado!");
 	}
 	
+	/**
+	 * Método reponsável pela listagem de todos os produtos cadastrados no sistema, de todos os fornecedores que existirem.
+	 * 
+	 * @return Retorna um representação de todos os produtos do sistema.
+	 */
 	public String exibirProdutos() {
 		
 		Set<String> chaves = fornecedores.keySet();
@@ -257,11 +299,16 @@ public class ControllerFornecedorSaga {
 		return retorno;
 	}
 
-	/**
-	 * @param nome
-	 * @param descricao
-	 * @param fornecedor
-	 * @return
+	/** Método responsável pela remoção de determinado produto do sistema.
+	 * 
+	 * @param nome nome do produto a ser removido
+	 * @param descricao descrição do produto a ser removido
+	 * @param fornecedor fornecedor do produto a ser removido
+	 * 
+	 * @return Repassa o retorno advindo do método de remoção da classe {@link Fornecedor}.
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o nome do fornecedor seja vazio ou nulo.
+	 * @throws NullPointerException Essa exceção é gerada caso o fornecedor de tal produto não seja encontrado.
 	 */
 	public String removerProduto(String nome, String descricao, String fornecedor) {
 		

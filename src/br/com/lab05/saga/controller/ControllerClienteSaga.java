@@ -40,12 +40,13 @@ public class ControllerClienteSaga {
 	 * @param email email do cliente.
 	 * @param localTrabalho local de trabalho do cliente.
 	 * 
-	 * @return Retorna uma representação confirmando ou não o cadastro do novo cliente.
+	 * @return Retorna o cpf do cliente recém cadastrado.
 	 * 
 	 * @throws RuntimeException Este método pode repassar exceções geradas na classe cliente no momento da
 	 *  criação de um novo cliente. A passagem de parametros vazios ou inválidos pode gerar tais exceções. 
 	 *  Essas exceções podem ser do tipo {@link NullPointerException} caso algum dos parametros seja nulo, 
-	 *  ou do tipo {@link IllegalArgumentException} caso algum parâmetro seja vazio.
+	 *  ou do tipo {@link IllegalArgumentException} caso algum parâmetro seja vazio. A exceção também pode ser 
+	 *  gerada caso o cliente já esteja cadastrado.
 	 *  
 	 */
 	public String cadastrarCliente(String cpf,String nome,String email,String localTrabalho) throws RuntimeException {
@@ -61,11 +62,12 @@ public class ControllerClienteSaga {
 	
 	/**
 	 * Este método faz uma busca e retorna algum cliente que esteja cadastrado no sistema. 
-	 * Caso não encontre o cliente, o método retorna uma mensagem de erro.
 	 * 
 	 * @param cpf cpf do cliente a ser buscado
 	 * 
-	 * @return Retorna a representação do cliente, se for encontrado, ou uma mensagem de erro.
+	 * @return Retorna a representação do cliente, se for encontrado.
+	 * 
+	 * @throws NullPointerException Gera essa exceção caso o {@link Cliente} não esteja cadastrado.
 	 */
 	public String buscarCliente(String cpf) {
 		
@@ -84,16 +86,16 @@ public class ControllerClienteSaga {
 	 * cliente não cadastrado, são geradas exceções.
 	 * 
 	 * @param cpf cpf do cliente a ser editado
-	 * @param novoDado dado a ser alterado
-	 * @param valor novo valor do dado a ser alterado
+	 * @param atributo dado a ser alterado
+	 * @param novoDado novo valor do dado a ser alterado.
 	 * 
-	 * @return Retorna uma confirmação ou não do sucesso da edição do cliente.
+	 * @return Retorna uma confirmação da edição do cliente.
 	 * 
 	 * @throws NullPointerException Caso tentem editar algum dado de um cliente que não está cadastrado, 
 	 * esta exceção é gerada.
 	 * 
-	 * @throws IllegalArgumentException Caso tentem editar algum dado inexistente em um cliente, esta 
-	 * exceção é gerada!
+	 * @throws IllegalArgumentException Caso algum dos dados seja vazio ou nulo, ou seja um dado inexistente 
+	 * esta exceção é gerada.
 	 */
 	public String editarCliente(String cpf,String atributo,String novoDado) {
 		
@@ -132,9 +134,9 @@ public class ControllerClienteSaga {
 	 * 
 	 * @return Retorna uma representação de todos os clientes em ordem alfabética.
 	 * 
-	 * @throws RuntimeException Gera um erro caso não haja clientes cadastrados para serem listados.
+	 * @throws NullPointerException Gera um erro caso não haja clientes cadastrados para serem listados.
 	 */
-	public String listarClientes() throws NullPointerException {
+	public String listarClientes() {
 	
 		if(clientes.isEmpty())
 			throw new NullPointerException("Não há clientes cadastrados no sistema!");
@@ -165,7 +167,7 @@ public class ControllerClienteSaga {
 	 * 
 	 * @param cpf cpf do cliente a ser removido.
 	 * 
-	 * @return Retorna uma mensagem de confirmação ou não da exclusão de algum cliente.
+	 * @return Retorna o cpf do cliente recém removido.
 	 * 
 	 * @throws NullPointerException Caso o cliente não esteja cadastrado no sistema, um erro é gerado pois não há como excluir um 
 	 * cliente não cadastrado!
