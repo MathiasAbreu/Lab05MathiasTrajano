@@ -40,9 +40,6 @@ public class Cliente {
 	 */
 	public Cliente(String cpf, String nome, String email, String localTrabalho) {
 
-		if(cpf.length() != 11)
-			throw new IllegalArgumentException("Erro no cadastro do cliente: cpf invalido.");
-		
 		if(cpf == null || cpf.trim().isEmpty())
 			throw new RuntimeException("Erro no cadastro do cliente: cpf nao pode ser vazio ou nulo.");
 		if(nome == null || nome.trim().isEmpty())
@@ -52,6 +49,8 @@ public class Cliente {
 		if(localTrabalho == null || localTrabalho.trim().isEmpty())
 			throw new RuntimeException("Erro no cadastro do cliente: localizacao nao pode ser vazia ou nula.");
 		
+		if(cpf.length() != 11)
+			throw new IllegalArgumentException("Erro no cadastro do cliente: cpf invalido.");
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

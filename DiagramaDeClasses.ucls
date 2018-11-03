@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="true" nesting-relationships="true" 
+  router="FAN">  
+  <class id="1" language="java" name="br.com.lab05.saga.model.Fornecedor" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/Fornecedor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="385" width="240" x="662" y="817"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="br.com.lab05.saga.model.FornecedorComparator" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/FornecedorComparator.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="97" width="204" x="266" y="75"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="br.com.lab05.saga.facade.SagaFacade" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/facade/SagaFacade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="385" width="267" x="510" y="75"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="br.com.lab05.saga.controller.ControllerClienteSaga" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/controller/ControllerClienteSaga.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="169" width="264" x="358" y="500"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="br.com.lab05.saga.model.ClienteComparator" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/ClienteComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="159" x="817" y="75"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="br.com.lab05.saga.model.ProdutoComparator" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/ProdutoComparator.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="97" width="169" x="1016" y="75"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="br.com.lab05.saga.controller.ControllerFornecedorSaga" 
+    project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/controller/ControllerFornecedorSaga.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="277" width="271" x="662" y="500"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="br.com.lab05.saga.model.Cliente" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/Cliente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="331" width="188" x="358" y="817"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="br.com.lab05.saga.model.Produto" project="Lab05MathiasTrajano" 
+    file="/Lab05MathiasTrajano/src/br/com/lab05/saga/model/Produto.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="259" width="166" x="662" y="1242"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="10">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="11" name="fornecedores"/>      
+      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="13">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="14" name="clientes"/>      
+      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="17" name="produtos"/>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="20" name="controleCliente"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="23" name="controleFornecedor"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
