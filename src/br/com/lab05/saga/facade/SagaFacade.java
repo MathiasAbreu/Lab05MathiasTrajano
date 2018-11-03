@@ -4,6 +4,7 @@ import br.com.lab05.saga.controller.ControllerClienteSaga;
 import br.com.lab05.saga.controller.ControllerFornecedorSaga;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
+import br.com.lab05.saga.model.Produto;
 import easyaccept.EasyAccept;
 
 /**Representação da classe de fachada do cliente.
@@ -38,7 +39,7 @@ public class SagaFacade {
 	 * @param cpf cpf do cliente
 	 * @param nome nome do cliente
 	 * @param email email do cliente
-	 * @param localTrabalho local de trabalho do cliente
+	 * @param localizacao local de trabalho do cliente
 	 * 
 	 * @return Retorna mensagem de confimação ou não do cadastro do novo cliente.
 	 * 
@@ -67,14 +68,16 @@ public class SagaFacade {
 		return controleFornecedor.adicionarFornecedor(nome, email, telefone);
 	}
 	
-	/**
+	/**Método que cadastra um novo {@link Produto}.
 	 * 
-	 * @param fornecedor
-	 * @param nome
-	 * @param descricao
-	 * @param preco
-	 * @return
-	 * @throws RuntimeException
+	 * @param fornecedor fornecedor do produto
+	 * @param nome nome do produto
+	 * @param descricao descrição do produto
+	 * @param preco preço do produto
+	 * 
+	 * @return Repassa o retorno advindo de métodos anteriores a esse.
+	 * 
+	 * @throws RuntimeException Gera exceções que possem ser causadas pela ṕassagem de parâmetros inválidos.
 	 */
 	public String adicionaProduto(String fornecedor,String nome,String descricao,double preco) throws RuntimeException{
 		
@@ -108,16 +111,37 @@ public class SagaFacade {
 		return controleFornecedor.buscarFornecedor(nome);
 	}
 	
+	/**
+	 * Método que busca algum produto de determinado fornecedor.
+	 * 
+	 * @param nome nome do produto
+	 * @param descricao descrição do produto
+	 * @param fornecedor fornecedor do produto
+	 * 
+	 * @return Retorna a representação do produto, em String.
+	 */
 	public String exibeProduto(String nome,String descricao, String fornecedor) {
 		
 		return controleFornecedor.buscarProduto(nome,descricao,fornecedor);
 	}
 	
+	/**
+	 * Método que exibe todos os produtos de um determinado fornecedor.
+	 * 
+	 * @param fornecedor fornecedor em questão
+	 * 
+	 * @return Retorna uma representação de todos os produtos de um fornecedor.
+	 */
 	public String exibeProdutosFornecedor(String fornecedor) {
 		
 		return controleFornecedor.exibirProdutos(fornecedor);
 	}
 	
+	/**
+	 * Método que exibe todos os produtos de todos os fornecedores do sistema, em ordem alfabética.
+	 * 
+	 * @return Retorna uma representação de todos os produtos.
+	 */
 	public String exibeProdutos() {
 		
 		return controleFornecedor.exibirProdutos();
@@ -133,6 +157,11 @@ public class SagaFacade {
 		return controleCliente.listarClientes();
 	}
 	
+	/**
+	 * Método que retorna todos os fornecedores cadastrados no sistema, em ordem alfabética.
+	 * 
+	 * @return Retorna todos os fornecedores do sistema.
+	 */
 	public String exibeFornecedores() {
 		
 		return controleFornecedor.listarFornecedores();
@@ -142,10 +171,8 @@ public class SagaFacade {
 	 * Método que edita dados de um certo cliente.
 	 * 
 	 * @param cpf cpf do cliente a ser editado
-	 * @param novoDado novo dado 
-	 * @param valor valor de representação do dado a ser editado
-	 * 
-	 * @return Retorna um mensagem de exito do processo de edição do cliente.
+	 * @param atributo dado a ser modificado 
+	 * @param novoValor valor de representação do dado a ser editado
 	 * 
 	 * @throws RuntimeException Este método pode receber exceções advindos das classes de controle e cliente.
 	 */
@@ -158,8 +185,8 @@ public class SagaFacade {
 	 * Método que edita dados de um certo fornecedor.
 	 * 
 	 * @param nome nome do fornecedor a ser editado
-	 * @param novoDado novo dado
-	 * @param valor valor de representação do dado a ser editado
+	 * @param atributo dado a ser alterado
+	 * @param novoValor valor de representação do dado a ser editado
 	 * 
 	 * @return Retorna uma mensagem de êxito do processo de edição do fornecedor.
 	 * 
@@ -170,6 +197,16 @@ public class SagaFacade {
 		return controleFornecedor.editarFornecedor(nome, atributo, novoValor);
 	}
 	
+	/**
+	 * Método que o preço de um determinado produto.
+	 * 
+	 * @param nome nome do produto
+	 * @param descricao descrição do produto
+	 * @param fornecedor fornecedor do produto
+	 * @param novoPreco novo preço do produto
+	 * 
+	 * @return Retorna uma mensagem confirmando a operação.
+	 */
 	public String editaProduto(String nome, String descricao, String fornecedor, double novoPreco) {
 		
 		return controleFornecedor.editarProduto(nome,descricao,fornecedor,novoPreco);
@@ -203,6 +240,15 @@ public class SagaFacade {
 		return controleFornecedor.removerFornecedor(nome);
 	}
 	
+	/**
+	 * Método que remove um determinado produto de um determinado fornecedor.
+	 * 
+	 * @param nome nome do produto a ser removido
+	 * @param descricao descrição do produto a ser removido
+	 * @param fornecedor fornecedor do produto
+	 * 
+	 * @return Retorna uma mensagem confirmando a operação.
+	 */
 	public String removeProduto(String nome,String descricao,String fornecedor) {
 		
 		return controleFornecedor.removerProduto(nome,descricao,fornecedor);

@@ -30,7 +30,7 @@ class FornecedorsTests {
 		fornecedor03 = new Fornecedor("João","joao.silva","-098765432");
 		
 		fornecedor.adicionarProduto("ArrozBranco","Pacote de arroz",3.50);
-
+		fornecedor.adicionarProduto("Farinha","Farinha de Trigo",2.35);
 	}
 
 	@Test
@@ -165,5 +165,102 @@ class FornecedorsTests {
 		});
 		
 		assertEquals("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.",iae.getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testando método de busca com produto inexistente")
+	void testBuscarProduto03() {
+		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
+			
+			fornecedor.buscarProduto("Feijão","Feijão carioca");
+		});
+		
+		assertEquals("Erro na exibicao de produto: produto nao existe.",npe.getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testando método de remover produto")
+	void testRemoverProduto01() {
+		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
+
+			fornecedor.removerProduto("ArrozBranco","Pacote de arroz");
+			fornecedor.buscarProduto("ArrozBranco","Pacote de arroz");
+		});
+		
+		assertEquals("Erro na exibicao de produto: produto nao existe.",npe.getMessage());
+		
+	}
+	
+	@Test
+	@DisplayName("Testando método de remover produto com parametro inválido")
+	void testRemoverProduto02() {
+		IllegalArgumentException npe = assertThrows(IllegalArgumentException.class,() -> {
+
+			fornecedor.removerProduto("","Pacote de arroz");
+
+		});
+		
+		assertEquals("Erro na remocao de produto: nome nao pode ser vazio ou nulo.",npe.getMessage());
+		
+	}
+	
+	@Test
+	@DisplayName("Testando método de busca com produto inexistente")
+	void testRemoverProduto03() {
+		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
+			
+			fornecedor.removerProduto("Feijão","Feijão carioca");
+		});
+		
+		assertEquals("Erro na remocao de produto: produto nao existe.",npe.getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testando método de listar produtos")
+	void testListarProdutos01() {
+		
+		assertEquals("Mathias - ArrozBranco - Pacote de arroz - R$3,50 | Mathias - Farinha - Farinha de Trigo - R$2,35",fornecedor.listarProdutos());
+	}
+	
+	@Test
+	@DisplayName("Testando método de listar sem ter produtos cadastrados")
+	void testListarProdutos02() {
+		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
+			
+			fornecedor02.listarProdutos();
+		});
+		
+		assertEquals("Não há produtos cadastrados!",npe.getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testando método de editar produto")
+	void testEditarProduto01() {
+		
+		fornecedor.editarProduto("Farinha","Farinha de Trigo",4.40);
+		
+		assertEquals("Farinha - Farinha de Trigo - R$4,40",fornecedor.buscarProduto("Farinha","Farinha de Trigo").toString());
+	}
+	
+	@Test
+	@DisplayName("Testando método de editar produto com parametro inválido")
+	void testEditarProduto02() {
+		IllegalArgumentException iae = assertThrows(IllegalArgumentException.class,() -> {
+			
+			fornecedor.editarProduto("","Farinha de Trigo",4.40);
+		});
+		
+		assertEquals("Erro na edicao de produto: nome nao pode ser vazio ou nulo.",iae.getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testando método de editar produto com preço inválido")
+	void testEditarProduto03() {
+		IllegalArgumentException iae = assertThrows(IllegalArgumentException.class,() -> {
+			
+			fornecedor.editarProduto("Farinha","Farinha de Trigo",-5);
+		});
+		
+		assertEquals("Erro na edicao de produto: preco invalido.",iae.getMessage());
 	}
 }
