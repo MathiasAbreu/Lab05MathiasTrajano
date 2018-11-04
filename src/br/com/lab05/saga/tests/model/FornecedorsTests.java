@@ -225,12 +225,9 @@ class FornecedorsTests {
 	@Test
 	@DisplayName("Testando método de listar sem ter produtos cadastrados")
 	void testListarProdutos02() {
-		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
-			
-			fornecedor02.listarProdutos();
-		});
 		
-		assertEquals("Não há produtos cadastrados!",npe.getMessage());
+		assertEquals("",fornecedor02.listarProdutos());
+
 	}
 	
 	@Test

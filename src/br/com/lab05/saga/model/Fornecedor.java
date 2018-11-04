@@ -264,7 +264,7 @@ public class Fornecedor {
 	public String listarProdutos() {
 		
 		if(produtos.size() == 0) {
-			throw new NullPointerException("Não há produtos cadastrados!");
+			return "";
 		}
 		
 		ProdutoComparator comparador = new ProdutoComparator();
@@ -309,6 +309,15 @@ public class Fornecedor {
 		}
 		
 		throw new NullPointerException("Erro na remocao de produto: produto nao existe.");
+	}
+
+	/** Método que verifica se há produtos cadastrados para o fornecedor.
+	 * 
+	 * @return Retorna o número de produtos cadastrados.
+	 */
+	public int existirProdutos() {
+
+		return produtos.size();
 	}
 	
 }

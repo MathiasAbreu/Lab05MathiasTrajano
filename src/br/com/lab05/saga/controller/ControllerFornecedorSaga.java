@@ -54,7 +54,7 @@ public class ControllerFornecedorSaga {
 			return nome;
 		}
 		
-		throw new RuntimeException("Erro no cadastro de fornecedor: fornecedor ja existe.");
+		throw new NullPointerException("Erro no cadastro de fornecedor: fornecedor ja existe.");
 	}
 
 	/**
@@ -81,6 +81,9 @@ public class ControllerFornecedorSaga {
 	 */
 	public String listarFornecedores() {
 		
+		if(fornecedores.isEmpty()) {
+			throw new NullPointerException("Não há fornecedores cadastrados!");
+		}
 		Set<String> chaves = fornecedores.keySet();
 		ArrayList<Fornecedor> fornecedors = new ArrayList<>();
 		
@@ -170,7 +173,7 @@ public class ControllerFornecedorSaga {
 			return nome;
 		}
 				
-		throw new NullPointerException("Impossível remover um cliente que não estava cadastrado!");
+		throw new NullPointerException("Impossível remover um fornecedor que não estava cadastrado!");
 	}
 
 	/** Método responsável pelo cadastramento de um novo produto no sistema. Ele recebe todo os dados do novo produto
@@ -292,7 +295,9 @@ public class ControllerFornecedorSaga {
 		String retorno = fornecedors.get(0).listarProdutos();
 		
 		for(int i = 1;i < fornecedors.size();i++) {
-			
+			if(fornecedors.get(i).existirProdutos() == 0) {
+				continue;
+			}
 			retorno += " | " + fornecedors.get(i).listarProdutos();
 		}
 		
