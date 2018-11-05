@@ -1,6 +1,7 @@
 package br.com.lab05.saga.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import br.com.lab05.saga.comparators.ProdutoComparator;
@@ -180,9 +181,11 @@ public class Fornecedor {
 		
 		for (Produto produto : produtos) {
 			
-			if(produto.getNome().equals(nomeProduto) && produto.getDescricao().equals(descricao)) {
-				
-				return true;
+			if(produto.getClass() == ProdutoSimples.class) {
+				if(produto.getNome().equals(nomeProduto) && produto.getDescricao().equals(descricao)) {
+					
+					return true;
+				}
 			}
 		}
 		
@@ -205,11 +208,11 @@ public class Fornecedor {
 	public Produto buscarProduto(String nomeProduto, String descricao) {
 		
 		if(nomeProduto.trim().isEmpty())
-			throw new IllegalArgumentException("Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
+			throw new IllegalArgumentException("nome nao pode ser vazio ou nulo.");
 		if(descricao.trim().isEmpty())
-			throw new IllegalArgumentException("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
+			throw new IllegalArgumentException("descricao nao pode ser vazia ou nula.");
 		
-		if(verificaProduto(nomeProduto,descricao)) {
+		if(verificaProduto(nomeProduto,descricao) || verificaCombo(nomeProduto, descricao)) {
 			
 			for (Produto produto : produtos) {
 				
@@ -219,7 +222,7 @@ public class Fornecedor {
 			
 		}
 		
-		throw new NullPointerException("Erro na exibicao de produto: produto nao existe.");
+		throw new NullPointerException("produto nao existe.");
 	}
 
 	/** Método que edita algum produto recebendo como parâmetros o nome e descrição do produto desejada e o novo preço, 
@@ -246,7 +249,17 @@ public class Fornecedor {
 			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
 		}
 		
-		ProdutoSimples produto = (ProdutoSimples) buscarProduto(nomeProduto, descricao);
+		ProdutoSimples produto;
+		
+		try {
+			
+			produto = (ProdutoSimples) buscarProduto(nomeProduto, descricao);
+		
+		} catch (NullPointerException | IllegalArgumentException err) {
+			
+			throw new RuntimeException("Erro na edicao de produto: " + err.getMessage());
+		}
+		
 		produtos.remove(produto);
 		
 		produto.setPreco(novoPreco);
@@ -254,7 +267,41 @@ public class Fornecedor {
 		
 		return "Produto editado!";
 	}
+	
+	/**
+	 * @param nome2
+	 * @param descricao
+	 * @param novoFator
+	 */
+	public void editarCombo(String nomeProduto, String descricao, double novoFator) {
 
+		if(nomeProduto.trim().isEmpty()) {
+			throw new IllegalArgumentException("Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
+		}
+		if(descricao.trim().isEmpty()) {
+			throw new IllegalArgumentException("Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
+		}
+		if(novoFator <= 0 || novoFator >= 1) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
+		}
+		
+		Combo produto;
+		
+		try {
+			
+			produto = (Combo) buscarProduto(nomeProduto, descricao);
+		
+		} catch (NullPointerException | IllegalArgumentException err) {
+			
+			throw new RuntimeException("Erro na edicao de combo: " + err.getMessage());
+		}
+		
+		produtos.remove(produto);
+		
+		produto.setFator(novoFator);
+		produtos.add(produto);
+	}
+	
 	/** Método que lista todos os produtos do fornecedor em ordem alfabética.
 	 * 
 	 * @return Retorna uma String com as representações de todo so produtos do fornecedor.
@@ -348,24 +395,35 @@ public class Fornecedor {
 	 */
 	public void adicionarCombo(String nome, String descricao, double fator, String produtosDoCombo) {
 		
+		/*
+		 * Falar com algum monitor ou professor sobre essa questão.
+		 */
+		if(nome == null || nome.trim().isEmpty())
+			throw new RuntimeException("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
+		
+		if(descricao == null || descricao.trim().isEmpty())
+			throw new RuntimeException("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
+
+		if(fator <= 0 || fator >= 1)
+			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
+				
 		if(verificaCombo(nome, descricao))
 			throw new RuntimeException("Erro no cadastro de combo: combo ja existe.");
 		
 		if(produtosDoCombo.trim().isEmpty())
 			throw new IllegalArgumentException("Erro no cadastro de combo: combo deve ter produtos.");
 		
-		String[] produtos_separados = produtosDoCombo.split(",");
+		String[] produtos_separados = produtosDoCombo.split(", ");
 		String[] produto1 = produtos_separados[0].split(" - ");
 		String[] produto2 = produtos_separados[1].split(" - ");
-		
+			
 		if(verificaCombo(produto1[0],produto1[1]) || verificaCombo(produto2[0],produto2[1]))
 			throw new IllegalArgumentException("Erro no cadastro de combo: um combo n�o pode possuir combos na lista de produtos.");
 		
 		if(verificaProduto(produto1[0],produto1[1]) && verificaProduto(produto2[0],produto2[1]))
-			produtos.add(new Combo(nome,descricao,fator,produtos_separados[0],produtos_separados[1]));
+			produtos.add(new Combo(nome,descricao,fator,buscarProduto(produto1[0],produto1[1]),buscarProduto(produto2[0],produto2[1])));
 		else
 			throw new NullPointerException("Erro no cadastro de combo: produto nao existe.");
 		
 	}
-	
 }

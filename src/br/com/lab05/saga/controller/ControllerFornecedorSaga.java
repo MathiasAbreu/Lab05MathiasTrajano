@@ -224,7 +224,14 @@ public class ControllerFornecedorSaga {
 		
 		if(fornecedores.containsKey(fornecedor)) {
 			
-			return fornecedores.get(fornecedor).buscarProduto(nome,descricao).toString();
+			try {
+				
+				return fornecedores.get(fornecedor).buscarProduto(nome,descricao).toString();
+			
+			} catch (NullPointerException | IllegalArgumentException err) {
+				
+				throw new RuntimeException("Erro na exibicao de produto: " + err.getMessage());
+			}
 		}
 		
 		throw new NullPointerException("Erro na exibicao de produto: fornecedor nao existe.");
@@ -346,6 +353,26 @@ public class ControllerFornecedorSaga {
 			
 		} else 
 			throw new NullPointerException("Erro no cadastro de combo: fornecedor nao existe.");
+		
+	}
+
+	/**
+	 * @param nome
+	 * @param descricao
+	 * @param fornecedor
+	 * @param novoFator
+	 */
+	public void editarCombo(String nome, String descricao, String fornecedor, double novoFator) {
+
+		if(fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.");
+		
+		if(fornecedores.containsKey(fornecedor)) {
+			
+			fornecedores.get(fornecedor).editarCombo(nome, descricao, novoFator);
+		}
+		else
+			throw new NullPointerException("Erro na edicao de combo: fornecedor nao existe.");
 		
 	}
 }

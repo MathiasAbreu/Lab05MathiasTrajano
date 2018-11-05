@@ -218,6 +218,10 @@ public class SagaFacade {
 		return controleFornecedor.editarProduto(nome,descricao,fornecedor,novoPreco);
 	}
 	
+	public void editaCombo(String nome,String descricao,String fornecedor,double novoFator) {
+		
+		controleFornecedor.editarCombo(nome,descricao,fornecedor,novoFator);
+	}
 	/**
 	 * Método que remove determinado cliente do sistema.
 	 * 
