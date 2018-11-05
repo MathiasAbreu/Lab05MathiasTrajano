@@ -8,7 +8,7 @@ import java.util.Set;
 import br.com.lab05.saga.comparators.FornecedorComparator;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
-import br.com.lab05.saga.model.Produto;
+import br.com.lab05.saga.model.ProdutoSimples;
 
 /**
  * Representação do controle de fornecedores, onde se encontra todos os metodos de controle e modelagem, 
@@ -177,7 +177,7 @@ public class ControllerFornecedorSaga {
 	}
 
 	/** Método responsável pelo cadastramento de um novo produto no sistema. Ele recebe todo os dados do novo produto
-	 * assim como o fornecedor de tal {@linkplain Produto}. Caso algum dos dados seja inválido, ou o fornecedor em questão 
+	 * assim como o fornecedor de tal {@linkplain ProdutoSimples}. Caso algum dos dados seja inválido, ou o fornecedor em questão 
 	 * não exista, exceções são geradas.
 	 * 
 	 * @param fornecedor nome do fornecedor do produto.
@@ -327,5 +327,25 @@ public class ControllerFornecedorSaga {
 		}
 		
 		throw new NullPointerException("Erro na remocao de produto: fornecedor nao existe.");
+	}
+
+	/**
+	 * @param fornecedor
+	 * @param nome
+	 * @param descricao
+	 * @param fator
+	 * @param produtos
+	 */
+	public void adicionarCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
+		if(fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.");
+		
+		if(fornecedores.containsKey(fornecedor)) {
+			
+			fornecedores.get(fornecedor).adicionarCombo(nome,descricao,fator,produtos);
+			
+		} else 
+			throw new NullPointerException("Erro no cadastro de combo: fornecedor nao existe.");
+		
 	}
 }

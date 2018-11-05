@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import br.com.lab05.saga.model.Produto;
+import br.com.lab05.saga.model.ProdutoSimples;
 
 /**
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
@@ -15,23 +15,23 @@ import br.com.lab05.saga.model.Produto;
  */
 class ProductsTests {
 
-	private Produto produto;
-	private Produto produto02;
-	private Produto produto03;
+	private ProdutoSimples produto;
+	private ProdutoSimples produto02;
+	private ProdutoSimples produto03;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		produto = new Produto("X-Frango","Sanduiche com frango",3.50);
-		produto02 = new Produto("X-Frango","Sanduiche com frango",4.50);
-		produto03 = new Produto("X-Bacon","Sanduiche de Bacon",5);
+		produto = new ProdutoSimples("X-Frango","Sanduiche com frango",3.50);
+		produto02 = new ProdutoSimples("X-Frango","Sanduiche com frango",4.50);
+		produto03 = new ProdutoSimples("X-Bacon","Sanduiche de Bacon",5);
 		
 	}
 	@Test
 	@DisplayName("Criando um produto com dados corretos")
 	void testCadastrarProduto01() {
 		
-		produto = new Produto("X-Frango","Sanduiche com frango",3.50);
+		produto = new ProdutoSimples("X-Frango","Sanduiche com frango",3.50);
 		
 		assertEquals("X-Frango - Sanduiche com frango - R$3,50",produto.toString());
 	}
@@ -41,7 +41,7 @@ class ProductsTests {
 	void testCadastrarProduto02() {
 		RuntimeException rte = assertThrows(RuntimeException.class,() -> {
 			
-			produto = new Produto(null,"Sanduiche",5);
+			produto = new ProdutoSimples(null,"Sanduiche",5);
 		});
 		
 		assertEquals("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.",rte.getMessage());
@@ -52,7 +52,7 @@ class ProductsTests {
 	void testCadastrarProduto03() {
 		RuntimeException rte = assertThrows(RuntimeException.class,() -> {
 			
-			produto = new Produto("","Sanduiche",5);
+			produto = new ProdutoSimples("","Sanduiche",5);
 		});
 		
 		assertEquals("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.",rte.getMessage());
@@ -63,7 +63,7 @@ class ProductsTests {
 	void testCadastrarProduto04() {
 		RuntimeException rte = assertThrows(RuntimeException.class,() -> {
 			
-			produto = new Produto("X-Frango",null,5);
+			produto = new ProdutoSimples("X-Frango",null,5);
 		});
 		
 		assertEquals("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.",rte.getMessage());
@@ -74,7 +74,7 @@ class ProductsTests {
 	void testCadastrarProduto05() {
 		RuntimeException rte = assertThrows(RuntimeException.class,() -> {
 			
-			produto = new Produto("X-Frango","",5);
+			produto = new ProdutoSimples("X-Frango","",5);
 		});
 		
 		assertEquals("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.",rte.getMessage());

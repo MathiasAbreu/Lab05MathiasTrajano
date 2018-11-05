@@ -158,11 +158,11 @@ public class Fornecedor {
 	 */
 	public String adicionarProduto(String nomeProduto, String descricao, double preco) throws RuntimeException {
 		
-		if(produtos.contains(new Produto(nomeProduto,descricao,preco))) 
+		if(produtos.contains(new ProdutoSimples(nomeProduto,descricao,preco))) 
 			throw new RuntimeException("Erro no cadastro de produto: produto ja existe.");
 		else {
 			
-			produtos.add(new Produto(nomeProduto,descricao,preco));
+			produtos.add(new ProdutoSimples(nomeProduto,descricao,preco));
 			return "Produto cadastrado com sucesso!";
 		}		
 	}
@@ -176,11 +176,11 @@ public class Fornecedor {
 	 * @return Retorna um valor verificando a existência ou não de certo produto.
 	 * 
 	 */
-	private boolean verificaExistencia(String nomeProduto,String descricao) {
+	private boolean verificaProduto(String nomeProduto,String descricao) {
 		
 		for (Produto produto : produtos) {
 			
-			if(produto.equals(new Produto(nomeProduto,descricao,1))) {
+			if(produto.getNome().equals(nomeProduto) && produto.getDescricao().equals(descricao)) {
 				
 				return true;
 			}
@@ -195,7 +195,7 @@ public class Fornecedor {
 	 * @param nomeProduto nome do produto
 	 * @param descricao descricao do produto
 	 * 
-	 * @return Retorna um determinado {@link Produto} de um fornecedor, se o mesmo existir.
+	 * @return Retorna um determinado {@link ProdutoSimples} de um fornecedor, se o mesmo existir.
 	 * 
 	 * @throws IllegalArgumentException Gera uma exceção caso algum dos parâmetros seja nulo ou vazio, finalizando assim
 	 * o método.
@@ -209,7 +209,7 @@ public class Fornecedor {
 		if(descricao.trim().isEmpty())
 			throw new IllegalArgumentException("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
 		
-		if(verificaExistencia(nomeProduto,descricao)) {
+		if(verificaProduto(nomeProduto,descricao)) {
 			
 			for (Produto produto : produtos) {
 				
@@ -246,7 +246,7 @@ public class Fornecedor {
 			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
 		}
 		
-		Produto produto = buscarProduto(nomeProduto, descricao);
+		ProdutoSimples produto = (ProdutoSimples) buscarProduto(nomeProduto, descricao);
 		produtos.remove(produto);
 		
 		produto.setPreco(novoPreco);
@@ -318,6 +318,54 @@ public class Fornecedor {
 	public int existirProdutos() {
 
 		return produtos.size();
+	}
+
+	/**
+	 * @param nome2
+	 * @param descricao
+	 * @return
+	 */
+	private boolean verificaCombo(String nome, String descricao) {
+		
+		for (Produto produto : produtos) {
+			
+			if(produto.getClass() == Combo.class) {
+				
+				if(produto.getNome().equals(nome) && produto.getDescricao().equals(descricao))
+					return true;
+			}
+				
+		}
+		
+		return false;
+	}
+
+	/**
+	 * @param nome2
+	 * @param descricao
+	 * @param fator
+	 * @param produtos2
+	 */
+	public void adicionarCombo(String nome, String descricao, double fator, String produtosDoCombo) {
+		
+		if(verificaCombo(nome, descricao))
+			throw new RuntimeException("Erro no cadastro de combo: combo ja existe.");
+		
+		if(produtosDoCombo.trim().isEmpty())
+			throw new IllegalArgumentException("Erro no cadastro de combo: combo deve ter produtos.");
+		
+		String[] produtos_separados = produtosDoCombo.split(",");
+		String[] produto1 = produtos_separados[0].split(" - ");
+		String[] produto2 = produtos_separados[1].split(" - ");
+		
+		if(verificaCombo(produto1[0],produto1[1]) || verificaCombo(produto2[0],produto2[1]))
+			throw new IllegalArgumentException("Erro no cadastro de combo: um combo n�o pode possuir combos na lista de produtos.");
+		
+		if(verificaProduto(produto1[0],produto1[1]) && verificaProduto(produto2[0],produto2[1]))
+			produtos.add(new Combo(nome,descricao,fator,produtos_separados[0],produtos_separados[1]));
+		else
+			throw new NullPointerException("Erro no cadastro de combo: produto nao existe.");
+		
 	}
 	
 }

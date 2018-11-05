@@ -4,7 +4,7 @@ import br.com.lab05.saga.controller.ControllerClienteSaga;
 import br.com.lab05.saga.controller.ControllerFornecedorSaga;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
-import br.com.lab05.saga.model.Produto;
+import br.com.lab05.saga.model.ProdutoSimples;
 import easyaccept.EasyAccept;
 
 /**Representação da classe de fachada do cliente.
@@ -68,7 +68,7 @@ public class SagaFacade {
 		return controleFornecedor.adicionarFornecedor(nome, email, telefone);
 	}
 	
-	/**Método que cadastra um novo {@link Produto}.
+	/**Método que cadastra um novo {@link ProdutoSimples}.
 	 * 
 	 * @param fornecedor fornecedor do produto
 	 * @param nome nome do produto
@@ -82,6 +82,12 @@ public class SagaFacade {
 	public String adicionaProduto(String fornecedor,String nome,String descricao,double preco) throws RuntimeException{
 		
 		return controleFornecedor.adicionarProduto(fornecedor,nome,descricao,preco);
+	}
+	
+	public void adicionaCombo(String fornecedor,String nome,String descricao,double fator,String produtos) {
+		
+		controleFornecedor.adicionarCombo(fornecedor,nome,descricao,fator,produtos);
+		
 	}
 	
 	/**
@@ -124,7 +130,7 @@ public class SagaFacade {
 		
 		return controleFornecedor.buscarProduto(nome,descricao,fornecedor);
 	}
-	
+		
 	/**
 	 * Método que exibe todos os produtos de um determinado fornecedor.
 	 * 
@@ -256,7 +262,12 @@ public class SagaFacade {
 	
 	public static void main(String[] args) {
 		
-		args = new String[] {"br.com.lab05.saga.facade.SagaFacade","src/br/com/lab05/saga/easyAccept/use_case_1.txt","src/br/com/lab05/saga/easyAccept/use_case_2.txt","src/br/com/lab05/saga/easyAccept/use_case_3.txt"};
+		args = new String[] {"br.com.lab05.saga.facade.SagaFacade",
+							 "src/br/com/lab05/saga/easyAccept/use_case_1.txt",
+							 "src/br/com/lab05/saga/easyAccept/use_case_2.txt",
+							 "src/br/com/lab05/saga/easyAccept/use_case_3.txt",
+							 "src/br/com/lab05/saga/easyAccept/use_case_4.txt",
+							 "src/br/com/lab05/saga/easyAccept/use_case_5.txt"};
 		EasyAccept.main(args);
 	}
 }

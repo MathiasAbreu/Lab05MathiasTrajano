@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.com.lab05.saga.comparators.ProdutoComparator;
-import br.com.lab05.saga.model.Produto;
+import br.com.lab05.saga.model.ProdutoSimples;
 
 /**
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
@@ -19,18 +19,18 @@ import br.com.lab05.saga.model.Produto;
  */
 class ProdutsComparatorTests {
 
-	private Produto produto01;
-	private Produto produto02;
-	private Produto produto03;
+	private ProdutoSimples produto01;
+	private ProdutoSimples produto02;
+	private ProdutoSimples produto03;
 	
 	private ProdutoComparator comparador;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		produto01 = new Produto("X-Frango","Sanduiche de frango",4.50);
-		produto02 = new Produto("X-Infarto","Super X-tudo",7);
-		produto03 = new Produto("Coca-cola","Latinha de 250ml",2.50);
+		produto01 = new ProdutoSimples("X-Frango","Sanduiche de frango",4.50);
+		produto02 = new ProdutoSimples("X-Infarto","Super X-tudo",7);
+		produto03 = new ProdutoSimples("Coca-cola","Latinha de 250ml",2.50);
 		
 		comparador = new ProdutoComparator();
 		
