@@ -130,7 +130,8 @@ public class ControllerClienteSaga {
 			throw new NullPointerException("Erro na edicao do cliente: cliente nao existe.");
 	}
 	
-	/** Método que lista todos os clientes cadastrados em ordem alfabetica.
+	/** 
+	 * Método que lista todos os clientes cadastrados em ordem alfabetica.
 	 * 
 	 * @return Retorna uma representação de todos os clientes em ordem alfabética.
 	 * 

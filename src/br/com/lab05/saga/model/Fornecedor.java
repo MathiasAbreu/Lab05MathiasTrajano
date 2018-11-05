@@ -6,7 +6,8 @@ import java.util.Collections;
 
 import br.com.lab05.saga.comparators.ProdutoComparator;
 
-/** Representação de um fornecedor, possui como dados essenciais o nome, email e telefone dos fornecedores, 
+/** 
+ * Representação de um fornecedor, possui como dados essenciais o nome, email e telefone dos fornecedores, 
  * como também todos os produtos que são comercializados pelos mesmos.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
@@ -63,7 +64,8 @@ public class Fornecedor {
 		produtos = new ArrayList<>();
 	}
 
-	/** Método que retorna o nome do fornecedor.
+	/** 
+	 * Método que retorna o nome do fornecedor.
 	 * 
 	 * @return O nome do fornecedor.
 	 */
@@ -71,7 +73,8 @@ public class Fornecedor {
 		return nome;
 	}
 
-	/** Método que retorna o email do fornecedor.
+	/** 
+	 * Método que retorna o email do fornecedor.
 	 * 
 	 * @return O email do fornecedor.
 	 */
@@ -79,7 +82,8 @@ public class Fornecedor {
 		return email;
 	}
 
-	/** Método que altera o email do fornecedor.
+	/** 
+	 * Método que altera o email do fornecedor.
 	 * 
 	 * @param email O novo email do fornecedor.
 	 */
@@ -87,7 +91,8 @@ public class Fornecedor {
 		this.email = email;
 	}
 
-	/** Método que retorna o telefone do fornecedor.
+	/** 
+	 * Método que retorna o telefone do fornecedor.
 	 * 
 	 * @return o telefone do fornecedor.
 	 */
@@ -95,7 +100,8 @@ public class Fornecedor {
 		return telefone;
 	}
 
-	/** Método que altera o telefone do fornecedor.
+	/** 
+	 * Método que altera o telefone do fornecedor.
 	 * 
 	 * @param telefone O novo telefone do fornecedor.
 	 */
@@ -103,7 +109,8 @@ public class Fornecedor {
 		this.telefone = telefone;
 	}
 
-	/** Método que transforma o fornecedor em uma representação em inteiro.
+	/** 
+	 * Método que transforma o fornecedor em uma representação em inteiro.
 	 * 
 	 * @return Retorna um inteiro representando o fornecedor.
 	 */
@@ -114,7 +121,8 @@ public class Fornecedor {
 		return result;
 	}
 
-	/** Método que verifica se dois fornecedores são iguais.
+	/** 
+	 * Método que verifica se dois fornecedores são iguais.
 	 * 
 	 * @param obj um objeto qualquer para ser comparado.
 	 * 
@@ -225,7 +233,8 @@ public class Fornecedor {
 		throw new NullPointerException("produto nao existe.");
 	}
 
-	/** Método que edita algum produto recebendo como parâmetros o nome e descrição do produto desejada e o novo preço, 
+	/**
+	 * Método que edita algum produto recebendo como parâmetros o nome e descrição do produto desejada e o novo preço, 
 	 * pois esse é o unico dado que se permite alterar.
 	 * 
 	 * @param nomeProduto nome do produto
@@ -268,10 +277,13 @@ public class Fornecedor {
 		return "Produto editado!";
 	}
 	
-	/**
-	 * @param nome2
-	 * @param descricao
-	 * @param novoFator
+	/** 
+	 * Método que edita um {@link Combo} no sistema, recebe os dados que identificam um combo assim como o 
+	 * novo fator de desconto do mesmo.
+	 * 
+	 * @param nomeProduto nome do combo
+	 * @param descricao descrição do combo
+	 * @param novoFator novo fator de desconto do combo
 	 */
 	public void editarCombo(String nomeProduto, String descricao, double novoFator) {
 
@@ -302,7 +314,8 @@ public class Fornecedor {
 		produtos.add(produto);
 	}
 	
-	/** Método que lista todos os produtos do fornecedor em ordem alfabética.
+	/** 
+	 * Método que lista todos os produtos do fornecedor em ordem alfabética.
 	 * 
 	 * @return Retorna uma String com as representações de todo so produtos do fornecedor.
 	 * 
@@ -358,7 +371,8 @@ public class Fornecedor {
 		throw new NullPointerException("Erro na remocao de produto: produto nao existe.");
 	}
 
-	/** Método que verifica se há produtos cadastrados para o fornecedor.
+	/** 
+	 * Método que verifica se há produtos cadastrados para o fornecedor.
 	 * 
 	 * @return Retorna o número de produtos cadastrados.
 	 */
@@ -368,9 +382,12 @@ public class Fornecedor {
 	}
 
 	/**
-	 * @param nome2
-	 * @param descricao
-	 * @return
+	 * Método que verifica se existe um combo no sistema.
+	 * 
+	 * @param nome nome do combo
+	 * @param descricao descrição do combo
+	 * 
+	 * @return Retorna um valor booleano indicando se há ou não um combo no sistema.
 	 */
 	private boolean verificaCombo(String nome, String descricao) {
 		
@@ -388,10 +405,13 @@ public class Fornecedor {
 	}
 
 	/**
-	 * @param nome2
-	 * @param descricao
-	 * @param fator
-	 * @param produtos2
+	 * Método que adiciona um novo {@link Combo} no sistema, o método recebe todos os dados essenciais do novo 
+	 * combo assim como o {@link Fornecedor} que fornece tal combo.
+	 * 
+	 * @param nome nome do combo
+	 * @param descricao descrição do combo
+	 * @param fator fator de desconto do combo
+	 * @param produtosDoCombo produtos que compõem o combo
 	 */
 	public void adicionarCombo(String nome, String descricao, double fator, String produtosDoCombo) {
 		

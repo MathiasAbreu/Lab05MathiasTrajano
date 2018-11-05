@@ -1,6 +1,7 @@
 package br.com.lab05.saga.model;
 
-/**Classe que contém a representação de um cliente, possui atributos de identificação única dos mesmos, assim como métodos de controle sobre os mesmos.
+/**
+ * Classe que contém a representação de um cliente, possui atributos de identificação única dos mesmos, assim como métodos de controle sobre os mesmos.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br - 118111726
  *
@@ -27,7 +28,8 @@ public class Cliente {
 	 */
 	private String localTrabalho;
 	
-	/** Construtor que recebe todos os dados essenciais de um cliente, verifica alguma irregularidade em tais dados e por fim instancia um novo cliente.
+	/** 
+	 * Construtor que recebe todos os dados essenciais de um cliente, verifica alguma irregularidade em tais dados e por fim instancia um novo cliente.
 	 * 
 	 * @param cpf cpf do cliente
 	 * @param nome nome do cliente

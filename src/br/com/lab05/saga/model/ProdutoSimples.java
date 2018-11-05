@@ -1,6 +1,7 @@
 package br.com.lab05.saga.model;
 
-/** Classe que representa um produto no sistema, contém todos os atributos de um produto, assim como os métodos 
+/** 
+ * Classe que representa um produto simples do sistema, contém todos os atributos de um produto, assim como os métodos 
  * de controle e manipulação de tais dados.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
@@ -8,7 +9,8 @@ package br.com.lab05.saga.model;
  */
 public class ProdutoSimples extends Produto {
 
-	/** Construtor responsável pela construção de um novo objeto do tipo {@link ProdutoSimples}, contém clausulas de verificação 
+	/** 
+	 * Construtor responsável pela construção de um novo objeto do tipo {@link ProdutoSimples}, contém clausulas de verificação 
 	 * para evitar dados inválidos no momento da criação de um novo produto.
 	 * 
 	 * @param nome nome do produto
@@ -33,6 +35,11 @@ public class ProdutoSimples extends Produto {
 		this.preco = preco;
 	}
 	
+	/**
+	 * Método que altera o preço de um produto simples.
+	 * 
+	 * @param preco preço do produto
+	 */
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}

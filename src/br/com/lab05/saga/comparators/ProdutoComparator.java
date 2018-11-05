@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.lab05.saga.comparators;
 
 import java.util.Comparator;
@@ -8,7 +5,8 @@ import java.util.Comparator;
 import br.com.lab05.saga.model.Produto;
 import br.com.lab05.saga.model.ProdutoSimples;
 
-/** Classe utilizada para comparar objetos do tipo {@link ProdutoSimples} com função principal de ordenar os produtos no momento 
+/** 
+ * Classe utilizada para comparar objetos do tipo {@link ProdutoSimples} com função principal de ordenar os produtos no momento 
  * da impressão dos mesmos em alguns métodos.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br

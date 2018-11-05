@@ -3,11 +3,13 @@ package br.com.lab05.saga.facade;
 import br.com.lab05.saga.controller.ControllerClienteSaga;
 import br.com.lab05.saga.controller.ControllerFornecedorSaga;
 import br.com.lab05.saga.model.Cliente;
+import br.com.lab05.saga.model.Combo;
 import br.com.lab05.saga.model.Fornecedor;
 import br.com.lab05.saga.model.ProdutoSimples;
 import easyaccept.EasyAccept;
 
-/**Representação da classe de fachada do cliente.
+/**
+ * Representação da classe de fachada do cliente.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
  * 
@@ -68,7 +70,8 @@ public class SagaFacade {
 		return controleFornecedor.adicionarFornecedor(nome, email, telefone);
 	}
 	
-	/**Método que cadastra um novo {@link ProdutoSimples}.
+	/**
+	 * Método que cadastra um novo {@link ProdutoSimples}.
 	 * 
 	 * @param fornecedor fornecedor do produto
 	 * @param nome nome do produto
@@ -84,6 +87,16 @@ public class SagaFacade {
 		return controleFornecedor.adicionarProduto(fornecedor,nome,descricao,preco);
 	}
 	
+	/**
+	 * Método que cadastra um novo {@link Combo}.
+	 * 
+	 * @param fornecedor fornecedor do combo
+	 * @param nome nome do combo
+	 * @param descricao descrição do combo
+	 * @param fator fator de desconto do combo
+	 * @param produtos produtos que compõem o combo
+	 * 
+	 */
 	public void adicionaCombo(String fornecedor,String nome,String descricao,double fator,String produtos) {
 		
 		controleFornecedor.adicionarCombo(fornecedor,nome,descricao,fator,produtos);
@@ -218,10 +231,20 @@ public class SagaFacade {
 		return controleFornecedor.editarProduto(nome,descricao,fornecedor,novoPreco);
 	}
 	
+	/**
+	 * Método que edita um combo, devido as limitações impostas, somente o fator de desconto pode ser alterado.
+	 * 
+	 * @param nome nome do combo
+	 * @param descricao descrição do combo
+	 * @param fornecedor fornecedor do combo
+	 * @param novoFator novo fator de desconto do combo
+	 * 
+	 */
 	public void editaCombo(String nome,String descricao,String fornecedor,double novoFator) {
 		
 		controleFornecedor.editarCombo(nome,descricao,fornecedor,novoFator);
 	}
+	
 	/**
 	 * Método que remove determinado cliente do sistema.
 	 * 

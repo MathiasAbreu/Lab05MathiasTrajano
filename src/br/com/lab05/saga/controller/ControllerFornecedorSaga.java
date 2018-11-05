@@ -8,6 +8,7 @@ import java.util.Set;
 import br.com.lab05.saga.comparators.FornecedorComparator;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
+import br.com.lab05.saga.model.Produto;
 import br.com.lab05.saga.model.ProdutoSimples;
 
 /**
@@ -205,7 +206,7 @@ public class ControllerFornecedorSaga {
 	}
 
 	/**
-	 * Método que busca determinado produto de determinado fornecedor. Este método pode gerar exceções advindas da passagem 
+	 * Método que busca determinado produto de determinado {@link Produto}. Este método pode gerar exceções advindas da passagem 
 	 * inválida dos parâmetros.
 	 * 
 	 * @param nome nome do produto a ser buscado
@@ -263,7 +264,7 @@ public class ControllerFornecedorSaga {
 	}
 
 	/**
-	 * Método que lista todo os produtos de um determinado fornecedor, em ordem alfabética.
+	 * Método que lista todos os produtos de um determinado fornecedor, em ordem alfabética.
 	 * 
 	 * @param fornecedor produtos do fornecedor a ser retornado
 	 * 
@@ -336,12 +337,19 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro na remocao de produto: fornecedor nao existe.");
 	}
 
-	/**
-	 * @param fornecedor
-	 * @param nome
-	 * @param descricao
-	 * @param fator
-	 * @param produtos
+	/** Método responsável por adicionar um novo combo no sistema. Ele recebe todos os parametros necessários para 
+	 * criação de tal combo, tais como nome, descricao e o fornecedor que fornece tal produto. Também pode gerar ex
+	 * ceções caso algum irregularidade seja encontrada.
+	 * 
+	 * @param fornecedor fornecedor do combo
+	 * @param nome nome do combo
+	 * @param descricao descrição do combo
+	 * @param fator fator de desconto do combo
+	 * @param produtos produtos que compõe o combo
+	 * 
+	 * @throws IllegalArgumentException Esta exceção é gerada caso algum dos parâmetros seja nulo ou inválido.
+	 * @throws NullPointerException Exceção gerada pela inserção de um fornecedor inexistente no sistema.
+	 * 
 	 */
 	public void adicionarCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
 		if(fornecedor.trim().isEmpty())
@@ -356,11 +364,16 @@ public class ControllerFornecedorSaga {
 		
 	}
 
-	/**
-	 * @param nome
-	 * @param descricao
-	 * @param fornecedor
-	 * @param novoFator
+	/** Método responsável pela edição de um combo no sistema, devido as limitações impostas, somente o fator de 
+	 * desconto pode ser alterado.
+	 * 
+	 * @param nome nome do combo
+	 * @param descricao descrição do combo
+	 * @param fornecedor fornecedor do combo
+	 * @param novoFator novo fator de desconto
+	 * 
+	 * @throws IllegalArgumentException Esta exceção é gerada caso algum dos parâmetros inseridos seja nulo ou inválido.
+	 * @throws NullPointerException Esta exceção é gerada caso seja inserido um {@link Fornecedor} que não existe.
 	 */
 	public void editarCombo(String nome, String descricao, String fornecedor, double novoFator) {
 

@@ -1,31 +1,51 @@
 package br.com.lab05.saga.model;
 
 /**
+ * Classe que representa um modelo primordial de um produto, está classe é utilizada para modelar outros tipos
+ * de produtos que possam vir a existir.
+ * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
  * 
  */
 public class Produto {
 
+	/**
+	 * Nome do Produto.
+	 */
 	protected String nome;
+	
+	/**
+	 * Descrição do Produto.
+	 */
 	protected String descricao;
+	
+	/**
+	 * Preço do Produto.
+	 */
 	protected double preco;
 
 	/**
-	 * @return the nome
+	 * Método que retorna o nome do produto.
+	 * 
+	 * @return O nome do produto.
 	 */
 	public String getNome() {
 		return nome;
 	}
 	
 	/**
-	 * @return the descricao
+	 * Método que retorna a descrição do produto.
+	 * 
+	 * @return A descrição do produto.
 	 */
 	public String getDescricao() {
 		return descricao;
 	}
 	
 	/**
-	 * @return the preco
+	 * Método que retorna o preço do produto.
+	 * 
+	 * @return O preço do produto.
 	 */
 	public double getPreco() {
 		return preco;
@@ -74,5 +94,4 @@ public class Produto {
 	public String toString() {
 		return String.format("%s - %s - R$%.2f",nome,descricao,preco);
 	}
-
 }
