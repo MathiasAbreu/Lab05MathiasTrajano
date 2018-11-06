@@ -285,7 +285,7 @@ public class SagaFacade {
 		return controlerSaga.removerProduto(nome,descricao,fornecedor);
 	}
 	
-	public double getDebito(String cpf,String fornecedor) {
+	public String getDebito(String cpf,String fornecedor) {
 		
 		return controlerSaga.getDebito(cpf,fornecedor);
 	}

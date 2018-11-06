@@ -275,7 +275,7 @@ public class ControllerSaga {
 	 * @param fornecedor
 	 * @return
 	 */
-	public double getDebito(String cpf, String fornecedor) {
+	public String getDebito(String cpf, String fornecedor) {
 		
 		return controlerCliente.getDebito(cpf,fornecedor);
 	}

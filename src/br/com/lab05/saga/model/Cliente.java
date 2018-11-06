@@ -183,7 +183,8 @@ public class Cliente {
 			contas.get(fornecedor).adicionarCompra(data,nome_prod,desc_prod,preco);
 		}
 		else {
-			
+			contas.put(fornecedor,new Conta(fornecedor));
+			contas.get(fornecedor).adicionarCompra(data, nome_prod, desc_prod, preco);
 		}
 	}
 
@@ -191,14 +192,14 @@ public class Cliente {
 	 * @param fornecedor
 	 * @return
 	 */
-	public double getDebito(String fornecedor) {
+	public String getDebito(String fornecedor) {
 		
 		if(contas.containsKey(fornecedor)) {
 			
 			return contas.get(fornecedor).getDebito();
 		}
 		else
-			throw new NullPointerException("Erro ao recuperar debito: fornecedor nao existe.");
+			throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor");
 	}
 
 	/**

@@ -212,7 +212,7 @@ public class ControllerClienteSaga {
 	 * @param fornecedor
 	 * @return
 	 */
-	public double getDebito(String cpf, String fornecedor) {
+	public String getDebito(String cpf, String fornecedor) {
 		
 		if(cpf == null || cpf.trim().isEmpty() || cpf.length() != 11)
 			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");

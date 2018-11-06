@@ -1,6 +1,9 @@
 package br.com.lab05.saga.model;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * 
@@ -53,7 +56,7 @@ public class Conta {
 	/**
 	 * @return
 	 */
-	public double getDebito() {
+	public String getDebito() {
 		
 		double debito = 0;
 		for (int i = 0; i < compras.size(); i++) {
@@ -61,7 +64,11 @@ public class Conta {
 			debito += compras.get(i).getPreco();
 		}
 		
-		return debito;
+		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.getDefault());
+		formatSymbols.setDecimalSeparator('.');
+		DecimalFormat df = new DecimalFormat("#.00",formatSymbols);
+		
+		return df.format(debito);
 	}
 	
 	
