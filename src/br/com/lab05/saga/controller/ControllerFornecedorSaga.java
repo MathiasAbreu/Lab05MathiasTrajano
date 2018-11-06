@@ -7,6 +7,7 @@ import java.util.Set;
 
 import br.com.lab05.saga.comparators.FornecedorComparator;
 import br.com.lab05.saga.model.Cliente;
+import br.com.lab05.saga.model.Combo;
 import br.com.lab05.saga.model.Fornecedor;
 import br.com.lab05.saga.model.Produto;
 import br.com.lab05.saga.model.ProdutoSimples;
@@ -391,6 +392,18 @@ public class ControllerFornecedorSaga {
 	
 	public double getPrecoProduto(String fornecedor,String nome,String descricao) {
 		
-		return fornecedores.get(fornecedor).buscarProduto(nome, descricao).getPreco();
+		Produto produto = fornecedores.get(fornecedor).buscarProduto(nome, descricao);
+		
+		if(produto.getClass() == ProdutoSimples.class) {
+			ProdutoSimples produtoSimples = (ProdutoSimples) produto;
+			return produtoSimples.getPreco();
+		}
+		
+		if(produto.getClass() == Combo.class) {
+			Combo combo = (Combo) produto;
+			return combo.calculaPreco();
+		}
+		
+		throw new NullPointerException("Produto não encontrado!");
 	}
 }

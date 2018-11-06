@@ -18,11 +18,12 @@ public class Produto {
 	 * Descrição do Produto.
 	 */
 	protected String descricao;
-	
-	/**
-	 * Preço do Produto.
-	 */
-	protected double preco;
+
+	public Produto(String nome,String descricao) {
+		
+		this.nome = nome;
+		this.descricao = descricao;
+	}
 
 	/**
 	 * Método que retorna o nome do produto.
@@ -47,9 +48,6 @@ public class Produto {
 	 * 
 	 * @return O preço do produto.
 	 */
-	public double getPreco() {
-		return preco;
-	}
 	
 	/**
 	 * Método que transforma um Produto em uma representação em inteiro.
@@ -92,6 +90,6 @@ public class Produto {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%s - %s - R$%.2f",nome,descricao,preco);
+		return String.format("%s - %s",nome,descricao);
 	}
 }

@@ -248,11 +248,12 @@ public class Cliente {
 		ContaComparator comparador = new ContaComparator();
 		Collections.sort(conts,comparador);
 		
-		String retorno = conts.get(0).toString();
+		String retorno = "";
 		
-		for(int i = 1; i < conts.size(); i++) {
+		for(int i = 0; i < conts.size(); i++) {
+		
+			retorno += " | " + conts.get(i).getFornecedor() + conts.get(i).listarCompras();
 			
-			retorno += " | " + conts.get(i).listarCompras();
 		}
 		
 		return retorno;

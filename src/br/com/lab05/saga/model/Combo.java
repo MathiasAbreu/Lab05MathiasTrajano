@@ -17,12 +17,12 @@ public class Combo extends Produto {
 	/**
 	 * Produto Primário que compõe o combo.
 	 */
-	private Produto produto1;
+	private ProdutoSimples produto1;
 	
 	/**
 	 * Produto Secundário que compõe o combo.
 	 */
-	private Produto produto2;
+	private ProdutoSimples produto2;
 	
 	/**
 	 * Construtor responsável pela criação de um novo Combo no sistema, eles recebe todos os dados essenciais para a 
@@ -34,10 +34,9 @@ public class Combo extends Produto {
 	 * @param produto1 produto primário do combo
 	 * @param produto2 produto secundário do combo
 	 */
-	public Combo(String nome,String descricao,double fator,Produto produto1,Produto produto2) {
+	public Combo(String nome,String descricao,double fator,ProdutoSimples produto1,ProdutoSimples produto2) {
 		
-		this.nome = nome;
-		this.descricao = descricao;
+		super(nome,descricao);
 		
 		this.fator = fator;
 		
@@ -98,7 +97,7 @@ public class Combo extends Produto {
 	 * 
 	 * @return Retorna o preço do combo.
 	 */
-	private double calculaPreco() {
+	public double calculaPreco() {
 		return (produto1.getPreco() + produto2.getPreco()) * (1 - fator);
 	}
 }

@@ -185,19 +185,19 @@ public class Fornecedor {
 	 * @return Retorna um valor verificando a existência ou não de certo produto.
 	 * 
 	 */
-	private boolean verificaProduto(String nomeProduto,String descricao) {
+	private ProdutoSimples verificaProduto(String nomeProduto,String descricao) {
 		
 		for (Produto produto : produtos) {
 			
 			if(produto.getClass() == ProdutoSimples.class) {
 				if(produto.getNome().equals(nomeProduto) && produto.getDescricao().equals(descricao)) {
 					
-					return true;
+					return (ProdutoSimples) produto;
 				}
 			}
 		}
 		
-		return false;
+		return null;
 	}
 
 	/**
@@ -220,15 +220,13 @@ public class Fornecedor {
 		if(descricao.trim().isEmpty())
 			throw new IllegalArgumentException("descricao nao pode ser vazia ou nula.");
 		
-		if(verificaProduto(nomeProduto,descricao) || verificaCombo(nomeProduto, descricao)) {
-			
-			for (Produto produto : produtos) {
-				
-				if(produto.getNome().equals(nomeProduto) && produto.getDescricao().equals(descricao))
-					return produto;
-			}
-			
-		}
+		ProdutoSimples produto = verificaProduto(nomeProduto,descricao);
+		Combo combo = verificaCombo(nomeProduto, descricao);
+		
+		if(produto != null)
+			return produto;
+		if(combo != null)
+			return combo;
 		
 		throw new NullPointerException("produto nao existe.");
 	}
@@ -389,19 +387,20 @@ public class Fornecedor {
 	 * 
 	 * @return Retorna um valor booleano indicando se há ou não um combo no sistema.
 	 */
-	private boolean verificaCombo(String nome, String descricao) {
+	private Combo verificaCombo(String nome, String descricao) {
 		
 		for (Produto produto : produtos) {
 			
 			if(produto.getClass() == Combo.class) {
 				
 				if(produto.getNome().equals(nome) && produto.getDescricao().equals(descricao))
-					return true;
+
+					return (Combo) produto;
 			}
 				
 		}
 		
-		return false;
+		return null;
 	}
 
 	/**
@@ -427,7 +426,7 @@ public class Fornecedor {
 		if(fator <= 0 || fator >= 1)
 			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
 				
-		if(verificaCombo(nome, descricao))
+		if(verificaCombo(nome, descricao) != null)
 			throw new RuntimeException("Erro no cadastro de combo: combo ja existe.");
 		
 		if(produtosDoCombo.trim().isEmpty())
@@ -437,11 +436,11 @@ public class Fornecedor {
 		String[] produto1 = produtos_separados[0].split(" - ");
 		String[] produto2 = produtos_separados[1].split(" - ");
 			
-		if(verificaCombo(produto1[0],produto1[1]) || verificaCombo(produto2[0],produto2[1]))
+		if(verificaCombo(produto1[0],produto1[1]) != null || verificaCombo(produto2[0],produto2[1]) != null)
 			throw new IllegalArgumentException("Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
 		
-		if(verificaProduto(produto1[0],produto1[1]) && verificaProduto(produto2[0],produto2[1]))
-			produtos.add(new Combo(nome,descricao,fator,buscarProduto(produto1[0],produto1[1]),buscarProduto(produto2[0],produto2[1])));
+		if(verificaProduto(produto1[0],produto1[1]) != null && verificaProduto(produto2[0],produto2[1]) != null)
+			produtos.add(new Combo(nome,descricao,fator,(ProdutoSimples) buscarProduto(produto1[0],produto1[1]),(ProdutoSimples) buscarProduto(produto2[0],produto2[1])));
 		else
 			throw new NullPointerException("Erro no cadastro de combo: produto nao existe.");
 		

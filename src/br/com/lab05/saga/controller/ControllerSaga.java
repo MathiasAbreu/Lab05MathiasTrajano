@@ -1,6 +1,3 @@
-/**
- * 
- */
 package br.com.lab05.saga.controller;
 
 /**

@@ -9,6 +9,8 @@ package br.com.lab05.saga.model;
  */
 public class ProdutoSimples extends Produto {
 
+	private double preco;
+	
 	/** 
 	 * Construtor responsável pela construção de um novo objeto do tipo {@link ProdutoSimples}, contém clausulas de verificação 
 	 * para evitar dados inválidos no momento da criação de um novo produto.
@@ -21,18 +23,22 @@ public class ProdutoSimples extends Produto {
 	 * @throws IllegalArgumentException Essa exceção é gerada caso o preço passado para o produto seja negativo ou igual a 0.
 	 */
 	public ProdutoSimples(String nome, String descricao, double preco) {
+		
+		super(nome,descricao);
 
 		if(nome == null || nome.trim().isEmpty()) 
 			throw new RuntimeException("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.");
 		if(descricao == null || descricao.trim().isEmpty())
 			throw new RuntimeException("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.");
-		
+				
 		if(preco < 0)
 			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
 		
-		this.nome = nome;
-		this.descricao = descricao;
 		this.preco = preco;
+	}
+	
+	public double getPreco() {
+		return preco;
 	}
 	
 	/**
@@ -42,5 +48,10 @@ public class ProdutoSimples extends Produto {
 	 */
 	public void setPreco(double preco) {
 		this.preco = preco;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s - %s - R$%.2f",nome,descricao,preco);
 	}
 }
