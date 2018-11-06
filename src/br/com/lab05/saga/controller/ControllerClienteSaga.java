@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
+import javax.management.RuntimeErrorException;
+
 import br.com.lab05.saga.comparators.ClienteComparator;
 import br.com.lab05.saga.model.Cliente;
 
@@ -17,10 +19,12 @@ import br.com.lab05.saga.model.Cliente;
  */
 public class ControllerClienteSaga {
 	
+	private ControllerFornecedorSaga acessoFornecedor;
+	
 	/**
 	 * Coleção responsável pelo armazenamento dos clientes.
 	 */
-	private HashMap<String,Cliente> clientes;
+	private static HashMap<String,Cliente> clientes;
 	
 	/**
 	 * Cosntrutor responsável pela inicialização da classe.
@@ -192,8 +196,25 @@ public class ControllerClienteSaga {
 	 * @param nome_prod
 	 * @param desc_prod
 	 */
-	public void adicionarConta(String cpf, String fornecedor, String data, String nome_prod, String desc_prod) {
-		// TODO Auto-generated method stub
+	public void adicionarConta(String cpf, String fornecedor, String data, String nome_prod, String desc_prod,double preco) {
+		if(cpf.trim().isEmpty() || cpf.length() != 11)
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf invalido.");
+		if(clientes.containsKey(cpf)) {
+			
+			if(fornecedor == null || fornecedor.trim().isEmpty())
+				throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+			
+			acessoFornecedor = new ControllerFornecedorSaga();
+			
+			if(nome_prod == null || nome_prod.trim().isEmpty())
+				throw new IllegalArgumentException("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+			if(desc_prod == null || desc_prod.trim().isEmpty())
+				throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula");
+			
+			clientes.get(cpf).adicionarCompra(fornecedor,data,nome_prod,desc_prod,preco);
+		}
+		else
+			throw new NullPointerException("Erro ao cadastrar compra: cliente nao existe.");
 		
 	}
 }

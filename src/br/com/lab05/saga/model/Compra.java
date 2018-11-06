@@ -24,19 +24,28 @@ public class Compra {
 	public Compra(String dataCompra,String nomeProduto,String descricaoProduto, double preco) {
 		
 		if(dataCompra == null || dataCompra.trim().isEmpty())
-			throw new IllegalArgumentException("");
-		if(nomeProduto == null || nomeProduto.trim().isEmpty())
-			throw new IllegalArgumentException("");
-		if(descricaoProduto == null || descricaoProduto.trim().isEmpty())
-			throw new IllegalArgumentException("");
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
 		
-		if(preco <= 0)
-			throw new IllegalArgumentException("");
+		verificaData(dataCompra);
 		
 		this.dataCompra = dataCompra;
 		this.nomeProduto = nomeProduto;
 		this.descricaoProduto = descricaoProduto;
 		this.preco = preco;
+	}
+
+	/**
+	 * @param dataCompra2
+	 */
+	private void verificaData(String dataCompra) {
+		
+		String[] data = dataCompra.split("/");
+		
+		if(data[1].length() > 2)
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		if(Integer.parseInt(data[0]) > 31)
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+
 	}
 
 	/**

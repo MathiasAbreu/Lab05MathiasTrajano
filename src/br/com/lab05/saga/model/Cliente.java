@@ -1,5 +1,7 @@
 package br.com.lab05.saga.model;
 
+import java.util.HashMap;
+
 /**
  * Classe que contém a representação de um cliente, possui atributos de identificação única dos mesmos, assim como métodos de controle sobre os mesmos.
  * 
@@ -28,6 +30,8 @@ public class Cliente {
 	 */
 	private String localTrabalho;
 	
+	private HashMap<String, Conta> contas;
+	
 	/** 
 	 * Construtor que recebe todos os dados essenciais de um cliente, verifica alguma irregularidade em tais dados e por fim instancia um novo cliente.
 	 * 
@@ -53,10 +57,13 @@ public class Cliente {
 		
 		if(cpf.length() != 11)
 			throw new IllegalArgumentException("Erro no cadastro do cliente: cpf invalido.");
+		
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;
 		this.localTrabalho = localTrabalho;
+		
+		contas = new HashMap<>();
 	}
 
 	/**
@@ -162,5 +169,21 @@ public class Cliente {
 				return true;
 		}
 		return false;
+	}
+
+	/**
+	 * @param fornecedor
+	 * @param data
+	 * @param nome_prod
+	 * @param desc_prod
+	 */
+	public void adicionarCompra(String fornecedor, String data, String nome_prod, String desc_prod,double preco) {
+
+		if(contas.containsKey(fornecedor)) {
+			contas.get(fornecedor).adicionarCompra(data,nome_prod,desc_prod,preco);
+		}
+		else {
+			
+		}
 	}
 }

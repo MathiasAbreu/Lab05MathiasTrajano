@@ -22,7 +22,7 @@ public class ControllerFornecedorSaga {
 	/**
 	 * Coleção que armazena todos os fornecedores do sistema.
 	 */
-	private HashMap<String, Fornecedor> fornecedores;
+	private final HashMap<String, Fornecedor> fornecedores;
 	
 	/**
 	 * Construtor que inicia uma nova instância de um Controle de Fornecedor.
@@ -387,5 +387,10 @@ public class ControllerFornecedorSaga {
 		else
 			throw new NullPointerException("Erro na edicao de combo: fornecedor nao existe.");
 		
+	}
+	
+	public double getPrecoProduto(String fornecedor,String nome,String descricao) {
+		
+		return fornecedores.get(fornecedor).buscarProduto(nome, descricao).getPreco();
 	}
 }

@@ -24,4 +24,31 @@ public class Conta {
 		
 		compras = new ArrayList<>();
 	}
+
+	/**
+	 * @return the fornecedor
+	 */
+	public String getFornecedor() {
+		return fornecedor;
+	}
+
+	/**
+	 * @param fornecedor the fornecedor to set
+	 */
+	public void setFornecedor(String fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	/**
+	 * @param data
+	 * @param nome_prod
+	 * @param desc_prod
+	 * @param preco
+	 */
+	public void adicionarCompra(String data, String nome_prod, String desc_prod, double preco) {
+
+		compras.add(new Compra(data,nome_prod,desc_prod,preco));
+	}
+	
+	
 }

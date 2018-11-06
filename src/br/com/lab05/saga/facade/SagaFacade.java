@@ -2,6 +2,7 @@ package br.com.lab05.saga.facade;
 
 import br.com.lab05.saga.controller.ControllerClienteSaga;
 import br.com.lab05.saga.controller.ControllerFornecedorSaga;
+import br.com.lab05.saga.controller.ControllerSaga;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Combo;
 import br.com.lab05.saga.model.Fornecedor;
@@ -15,24 +16,15 @@ import easyaccept.EasyAccept;
  * 
  */
 public class SagaFacade {
-	
-	/**
-	 * Instância da classe de controle de clientes.
-	 */
-	private ControllerClienteSaga controleCliente;
-	
-	/**
-	 * Instância da classe de controle de fornecedores.
-	 */
-	private ControllerFornecedorSaga controleFornecedor;
+
+	private ControllerSaga controlerSaga;
 	
 	/**
 	 * Construtor que inicia a classe e instancia o controle de clientes.
 	 */
 	public SagaFacade() {
 		
-		controleCliente = new ControllerClienteSaga();
-		controleFornecedor = new ControllerFornecedorSaga();
+		controlerSaga = new ControllerSaga();
 	}
 	
 	/**
@@ -49,7 +41,7 @@ public class SagaFacade {
 	 */
 	public String adicionaCliente(String cpf,String nome,String email,String localizacao) throws RuntimeException {
 		
-		return controleCliente.cadastrarCliente(cpf, nome, email, localizacao);
+		return controlerSaga.cadastrarCliente(cpf, nome, email, localizacao);
 	}
 	
 	/**
@@ -67,7 +59,7 @@ public class SagaFacade {
 	 */
 	public String adicionaFornecedor(String nome,String email, String telefone) throws RuntimeException {
 		
-		return controleFornecedor.adicionarFornecedor(nome, email, telefone);
+		return controlerSaga.adicionarFornecedor(nome, email, telefone);
 	}
 	
 	/**
@@ -84,7 +76,7 @@ public class SagaFacade {
 	 */
 	public String adicionaProduto(String fornecedor,String nome,String descricao,double preco) throws RuntimeException{
 		
-		return controleFornecedor.adicionarProduto(fornecedor,nome,descricao,preco);
+		return controlerSaga.adicionarProduto(fornecedor,nome,descricao,preco);
 	}
 	
 	/**
@@ -99,13 +91,13 @@ public class SagaFacade {
 	 */
 	public void adicionaCombo(String fornecedor,String nome,String descricao,double fator,String produtos) {
 		
-		controleFornecedor.adicionarCombo(fornecedor,nome,descricao,fator,produtos);
+		controlerSaga.adicionarCombo(fornecedor,nome,descricao,fator,produtos);
 		
 	}
 	
 	public void adicionaCompra(String cpf,String fornecedor,String data,String nome_prod,String desc_prod) {
 		
-		controleCliente.adicionarConta(cpf,fornecedor,data,nome_prod,desc_prod);
+		controlerSaga.adicionarConta(cpf,fornecedor,data,nome_prod,desc_prod);
 		
 	}
 	
@@ -118,7 +110,7 @@ public class SagaFacade {
 	 */
 	public String exibeCliente(String cpf) {
 		
-		return controleCliente.buscarCliente(cpf);
+		return controlerSaga.buscarCliente(cpf);
 	}
 	
 	/**
@@ -133,7 +125,7 @@ public class SagaFacade {
 	 */
 	public String exibeFornecedor(String nome) throws RuntimeException {
 		
-		return controleFornecedor.buscarFornecedor(nome);
+		return controlerSaga.buscarFornecedor(nome);
 	}
 	
 	/**
@@ -147,7 +139,7 @@ public class SagaFacade {
 	 */
 	public String exibeProduto(String nome,String descricao, String fornecedor) {
 		
-		return controleFornecedor.buscarProduto(nome,descricao,fornecedor);
+		return controlerSaga.buscarProduto(nome,descricao,fornecedor);
 	}
 		
 	/**
@@ -159,7 +151,7 @@ public class SagaFacade {
 	 */
 	public String exibeProdutosFornecedor(String fornecedor) {
 		
-		return controleFornecedor.exibirProdutos(fornecedor);
+		return controlerSaga.exibirProdutos(fornecedor);
 	}
 	
 	/**
@@ -169,7 +161,7 @@ public class SagaFacade {
 	 */
 	public String exibeProdutos() {
 		
-		return controleFornecedor.exibirProdutos();
+		return controlerSaga.exibirProdutos();
 	}
 	
 	/**
@@ -179,7 +171,7 @@ public class SagaFacade {
 	 */
 	public String exibeClientes() {
 		
-		return controleCliente.listarClientes();
+		return controlerSaga.listarClientes();
 	}
 	
 	/**
@@ -189,7 +181,7 @@ public class SagaFacade {
 	 */
 	public String exibeFornecedores() {
 		
-		return controleFornecedor.listarFornecedores();
+		return controlerSaga.listarFornecedores();
 	}
 	
 	/**
@@ -203,7 +195,7 @@ public class SagaFacade {
 	 */
 	public void editaCliente(String cpf,String atributo,String novoValor) throws RuntimeException {
 		
-		controleCliente.editarCliente(cpf,atributo,novoValor);
+		controlerSaga.editarCliente(cpf,atributo,novoValor);
 	}
 	
 	/**
@@ -219,7 +211,7 @@ public class SagaFacade {
 	 */
 	public String editaFornecedor(String nome,String atributo,String novoValor) throws RuntimeException {
 		
-		return controleFornecedor.editarFornecedor(nome, atributo, novoValor);
+		return controlerSaga.editarFornecedor(nome, atributo, novoValor);
 	}
 	
 	/**
@@ -234,7 +226,7 @@ public class SagaFacade {
 	 */
 	public String editaProduto(String nome, String descricao, String fornecedor, double novoPreco) {
 		
-		return controleFornecedor.editarProduto(nome,descricao,fornecedor,novoPreco);
+		return controlerSaga.editarProduto(nome,descricao,fornecedor,novoPreco);
 	}
 	
 	/**
@@ -248,7 +240,7 @@ public class SagaFacade {
 	 */
 	public void editaCombo(String nome,String descricao,String fornecedor,double novoFator) {
 		
-		controleFornecedor.editarCombo(nome,descricao,fornecedor,novoFator);
+		controlerSaga.editarCombo(nome,descricao,fornecedor,novoFator);
 	}
 	
 	/**
@@ -262,7 +254,7 @@ public class SagaFacade {
 	 */
 	public String removeCliente(String cpf) {
 		
-		return controleCliente.removerCliente(cpf);
+		return controlerSaga.removerCliente(cpf);
 	}
 	
 	/**
@@ -276,7 +268,7 @@ public class SagaFacade {
 	 */
 	public String removeFornecedor(String nome) {
 		
-		return controleFornecedor.removerFornecedor(nome);
+		return controlerSaga.removerFornecedor(nome);
 	}
 	
 	/**
@@ -290,7 +282,7 @@ public class SagaFacade {
 	 */
 	public String removeProduto(String nome,String descricao,String fornecedor) {
 		
-		return controleFornecedor.removerProduto(nome,descricao,fornecedor);
+		return controlerSaga.removerProduto(nome,descricao,fornecedor);
 	}
 	
 	public static void main(String[] args) {
