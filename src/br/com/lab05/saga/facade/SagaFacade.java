@@ -15,7 +15,7 @@ import easyaccept.EasyAccept;
  * 
  */
 public class SagaFacade {
-
+	
 	/**
 	 * Instância da classe de controle de clientes.
 	 */
@@ -100,6 +100,12 @@ public class SagaFacade {
 	public void adicionaCombo(String fornecedor,String nome,String descricao,double fator,String produtos) {
 		
 		controleFornecedor.adicionarCombo(fornecedor,nome,descricao,fator,produtos);
+		
+	}
+	
+	public void adicionaCompra(String cpf,String fornecedor,String data,String nome_prod,String desc_prod) {
+		
+		controleCliente.adicionarConta(cpf,fornecedor,data,nome_prod,desc_prod);
 		
 	}
 	

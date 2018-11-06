@@ -184,4 +184,16 @@ public class ControllerClienteSaga {
 		
 		throw new NullPointerException("Impossível remover um cliente que não estava cadastrado!");
 	}
+
+	/**
+	 * @param cpf
+	 * @param fornecedor
+	 * @param data
+	 * @param nome_prod
+	 * @param desc_prod
+	 */
+	public void adicionarConta(String cpf, String fornecedor, String data, String nome_prod, String desc_prod) {
+		// TODO Auto-generated method stub
+		
+	}
 }
