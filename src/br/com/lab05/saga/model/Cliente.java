@@ -186,4 +186,27 @@ public class Cliente {
 			
 		}
 	}
+
+	/**
+	 * @param fornecedor
+	 * @return
+	 */
+	public double getDebito(String fornecedor) {
+		
+		if(contas.containsKey(fornecedor)) {
+			
+			return contas.get(fornecedor).getDebito();
+		}
+		else
+			throw new NullPointerException("Erro ao recuperar debito: fornecedor nao existe.");
+	}
+
+	/**
+	 * @return
+	 */
+	public boolean contemDebitos() {
+		if(contas.isEmpty())
+			return false;
+		return true;
+	}
 }

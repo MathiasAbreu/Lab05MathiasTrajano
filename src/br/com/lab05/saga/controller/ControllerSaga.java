@@ -76,18 +76,33 @@ public class ControllerSaga {
 	 */
 	public void adicionarConta(String cpf, String fornecedor, String data, String nome_prod, String desc_prod) {
 		
+		if(cpf.trim().isEmpty() || cpf.length() != 11)
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf invalido.");
+		if(nome_prod == null || nome_prod.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		if(desc_prod == null || desc_prod.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula");
+		if(data == null || data.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		
+		verificaData(data);
+		
+		if(fornecedor == null || fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+
 		double preco;
 		
 		try {
 			
+			controlerCliente.buscarCliente(cpf);
 			controlerFornecedor.buscarFornecedor(fornecedor);
 			controlerFornecedor.buscarProduto(nome_prod, desc_prod, fornecedor);
 			
 			preco = controlerFornecedor.getPrecoProduto(fornecedor, nome_prod, desc_prod);
 			
 		} catch (NullPointerException err) {
-			
-			throw new NullPointerException("Erro ao cadastrar compra: fornecedor nao existe.");
+		
+			throw new NullPointerException(err.getMessage().contains("cliente") ? "Erro ao cadastrar compra: cliente nao existe." : "Erro ao cadastrar compra: fornecedor nao existe.");
 		
 		} catch (RuntimeException err) {
 			
@@ -96,6 +111,22 @@ public class ControllerSaga {
 		
 		controlerCliente.adicionarConta(cpf, fornecedor, data, nome_prod, desc_prod,preco);
 	}
+	
+
+	/**
+	 * @param dataCompra2
+	 */
+	private void verificaData(String dataCompra) {
+		
+		String[] data = dataCompra.split("/");
+		
+		if(data[1].length() > 2)
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		if(Integer.parseInt(data[0]) > 31)
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+
+	}
+
 
 	/**
 	 * @param cpf
@@ -237,6 +268,16 @@ public class ControllerSaga {
 	public String removerProduto(String nome, String descricao, String fornecedor) {
 		
 		return controlerFornecedor.removerProduto(nome, descricao, fornecedor);
+	}
+
+	/**
+	 * @param cpf
+	 * @param fornecedor
+	 * @return
+	 */
+	public double getDebito(String cpf, String fornecedor) {
+		
+		return controlerCliente.getDebito(cpf,fornecedor);
 	}
 	
 	

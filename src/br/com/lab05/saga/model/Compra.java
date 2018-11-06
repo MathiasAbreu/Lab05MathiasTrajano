@@ -22,30 +22,11 @@ public class Compra {
 	 * @param produto
 	 */
 	public Compra(String dataCompra,String nomeProduto,String descricaoProduto, double preco) {
-		
-		if(dataCompra == null || dataCompra.trim().isEmpty())
-			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
-		
-		verificaData(dataCompra);
-		
+				
 		this.dataCompra = dataCompra;
 		this.nomeProduto = nomeProduto;
 		this.descricaoProduto = descricaoProduto;
 		this.preco = preco;
-	}
-
-	/**
-	 * @param dataCompra2
-	 */
-	private void verificaData(String dataCompra) {
-		
-		String[] data = dataCompra.split("/");
-		
-		if(data[1].length() > 2)
-			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
-		if(Integer.parseInt(data[0]) > 31)
-			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
-
 	}
 
 	/**

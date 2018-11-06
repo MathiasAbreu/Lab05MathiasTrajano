@@ -49,6 +49,20 @@ public class Conta {
 
 		compras.add(new Compra(data,nome_prod,desc_prod,preco));
 	}
+
+	/**
+	 * @return
+	 */
+	public double getDebito() {
+		
+		double debito = 0;
+		for (int i = 0; i < compras.size(); i++) {
+			
+			debito += compras.get(i).getPreco();
+		}
+		
+		return debito;
+	}
 	
 	
 }

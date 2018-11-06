@@ -197,24 +197,37 @@ public class ControllerClienteSaga {
 	 * @param desc_prod
 	 */
 	public void adicionarConta(String cpf, String fornecedor, String data, String nome_prod, String desc_prod,double preco) {
-		if(cpf.trim().isEmpty() || cpf.length() != 11)
-			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf invalido.");
+		
 		if(clientes.containsKey(cpf)) {
-			
-			if(fornecedor == null || fornecedor.trim().isEmpty())
-				throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
-			
-			acessoFornecedor = new ControllerFornecedorSaga();
-			
-			if(nome_prod == null || nome_prod.trim().isEmpty())
-				throw new IllegalArgumentException("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
-			if(desc_prod == null || desc_prod.trim().isEmpty())
-				throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula");
 			
 			clientes.get(cpf).adicionarCompra(fornecedor,data,nome_prod,desc_prod,preco);
 		}
 		else
 			throw new NullPointerException("Erro ao cadastrar compra: cliente nao existe.");
 		
+	}
+
+	/**
+	 * @param cpf
+	 * @param fornecedor
+	 * @return
+	 */
+	public double getDebito(String cpf, String fornecedor) {
+		
+		if(cpf == null || cpf.trim().isEmpty() || cpf.length() != 11)
+			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");
+		
+		if(fornecedor == null || fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
+		
+		if(clientes.containsKey(cpf)) {
+			
+			if(clientes.get(cpf).contemDebitos())
+				return clientes.get(cpf).getDebito(fornecedor);
+			else
+				throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
+		}
+		else
+			throw new NullPointerException("Erro ao recuperar debito: cliente nao existe.");
 	}
 }
