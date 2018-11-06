@@ -222,10 +222,8 @@ public class ControllerClienteSaga {
 		
 		if(clientes.containsKey(cpf)) {
 			
-			if(clientes.get(cpf).contemDebitos())
-				return clientes.get(cpf).getDebito(fornecedor);
-			else
-				throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
+			return clientes.get(cpf).getDebito(fornecedor);
+
 		}
 		else
 			throw new NullPointerException("Erro ao recuperar debito: cliente nao existe.");

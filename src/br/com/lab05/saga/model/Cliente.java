@@ -199,7 +199,7 @@ public class Cliente {
 			return contas.get(fornecedor).getDebito();
 		}
 		else
-			throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor");
+			throw new NullPointerException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
 	}
 
 	/**

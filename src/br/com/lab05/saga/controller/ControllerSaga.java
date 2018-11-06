@@ -277,6 +277,14 @@ public class ControllerSaga {
 	 */
 	public String getDebito(String cpf, String fornecedor) {
 		
+		try {
+			
+			controlerFornecedor.buscarFornecedor(fornecedor);
+			
+		} catch (NullPointerException err) {
+			
+			throw new NullPointerException("Erro ao recuperar debito: fornecedor nao existe.");
+		}
 		return controlerCliente.getDebito(cpf,fornecedor);
 	}
 	

@@ -1,7 +1,5 @@
 package br.com.lab05.saga.facade;
 
-import br.com.lab05.saga.controller.ControllerClienteSaga;
-import br.com.lab05.saga.controller.ControllerFornecedorSaga;
 import br.com.lab05.saga.controller.ControllerSaga;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Combo;
