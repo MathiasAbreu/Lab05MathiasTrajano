@@ -18,9 +18,7 @@ import br.com.lab05.saga.model.Cliente;
  *
  */
 public class ControllerClienteSaga {
-	
-	private ControllerFornecedorSaga acessoFornecedor;
-	
+		
 	/**
 	 * Coleção responsável pelo armazenamento dos clientes.
 	 */
@@ -160,6 +158,7 @@ public class ControllerClienteSaga {
 		String retorno = clients.get(0).toString();
 		
 		for (int i = 1; i < clients.size(); i++) {
+			
 			retorno += " | " + clients.get(i).toString();
 
 		}
@@ -217,9 +216,6 @@ public class ControllerClienteSaga {
 		if(cpf == null || cpf.trim().isEmpty() || cpf.length() != 11)
 			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");
 		
-		if(fornecedor == null || fornecedor.trim().isEmpty())
-			throw new IllegalArgumentException("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
-		
 		if(clientes.containsKey(cpf)) {
 			
 			return clientes.get(cpf).getDebito(fornecedor);
@@ -227,5 +223,40 @@ public class ControllerClienteSaga {
 		}
 		else
 			throw new NullPointerException("Erro ao recuperar debito: cliente nao existe.");
+	}
+
+	/**
+	 * @param cpf
+	 * @param fornecedor
+	 * @return
+	 */
+	public String exibirContas(String cpf, String fornecedor) {
+		
+		if(cpf == null || cpf.trim().isEmpty() || cpf.length() != 11)
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
+		
+		if(clientes.containsKey(cpf)) {
+			
+			return "Cliente: " + clientes.get(cpf).getNome() + " | " + clientes.get(cpf).exibirContas(fornecedor);
+		}
+		else
+			throw new NullPointerException("Erro ao exibir conta do cliente: cliente nao existe.");
+	}
+
+	/**
+	 * @param cpf
+	 * @return
+	 */
+	public String exibirContas(String cpf) {
+		
+		if(cpf == null || cpf.trim().isEmpty() || cpf.length() != 11)
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cpf invalido.");
+		
+		if(clientes.containsKey(cpf)) {
+			
+			return "Cliente: " + clientes.get(cpf).getNome() + clientes.get(cpf).exibirContas();
+		}
+		else
+			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao existe.");
 	}
 }

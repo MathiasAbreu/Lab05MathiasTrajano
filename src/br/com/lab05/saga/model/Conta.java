@@ -70,6 +70,20 @@ public class Conta {
 		
 		return df.format(debito);
 	}
+
+	/**
+	 * @return
+	 */
+	public String listarCompras() {
+		
+		String retorno = "";
+		for (Compra compra : compras) {
+			
+			retorno += " | " + compra.toString();
+		}
+		
+		return retorno;
+	}
 	
 	
 }

@@ -38,8 +38,8 @@ expectError "Erro ao recuperar debito: cliente nao tem debito com fornecedor." g
 ## Exibindo conta cliente ##
 
 expect "Cliente: Amigao Fernandes | Marcos | Coxao com batata - 03-12-2013 | Refrigerante - 03-06-2017" exibeContas cpf=19418510068 fornecedor="Marcos" 
-expect "Cliente: Ana Amari | Marcos | Refrigerante - 01-11-2016 | Coxao de Frango - 01-11-2016" exibeContas cpf=64269141198 fornecedor="Seu Olavo"
-expect "Cliente: Lucio Correia | Marcos | Coxao de Pizza - 07-04-1998" exibeContas cpf=58217738123 fornecedor="Marcos"
+expect "Cliente: Ana Amari | Marcos | Refrigerante - 01-11-2016 | Coxao de Frango - 01-11-2016" exibeContas cpf=64269141198 fornecedor="Marcos"
+expect "Cliente: Lucio Correia | Marcos | Coxao de Pizza - 07-04-1998 | Refrigerante - 11-12-1998" exibeContas cpf=58217738123 fornecedor="Marcos"
 expect "Cliente: Ana Amari | Seu Olavo | Suco - 02-04-2015" exibeContas cpf=64269141198 fornecedor="Seu Olavo"
 
 expectError "Erro ao exibir conta do cliente: cpf invalido." exibeContas cpf=19274 fornecedor="Seu Olavo"
@@ -50,14 +50,14 @@ expectError "Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com 
 
 ## Exibindo contas clientes ##
 
-expect "Cliente: Lucio Correia | Dona Alba | Rubacao - 01-11-2011 | Marcos | Coxao de Pizza - 07-04-1998" exibeContasCliente cpf=58217738123
-expect "Cliente: Ana Amari | Marcos | Coxao de Frango - 01-11-2016 | Refrigerante - 01-11-2016 | Seu Olavo | Suco - 02-04-2015" exibeContasClientes cpf=64269141198
+expect "Cliente: Lucio Correia | Dona Alba | Rubacao - 11-11-2011 | Marcos | Coxao de Pizza - 07-04-1998 | Refrigerante - 11-12-1998" exibeContasClientes cpf=58217738123
+expect "Cliente: Ana Amari | Marcos | Refrigerante - 01-11-2016 | Coxao de Frango - 01-11-2016 | Seu Olavo | Suco - 02-04-2015" exibeContasClientes cpf=64269141198
 expect "Cliente: Amigao Fernandes | Marcos | Coxao com batata - 03-12-2013 | Refrigerante - 03-06-2017" exibeContasClientes cpf=19418510068
 
-expectError "Erro ao exibir contas do cliente: cpf invalido." exibeContas cpf=102487
-expectError "Erro ao exibir contas do cliente: cliente nao existe." cpf=12345678912
+expectError "Erro ao exibir contas do cliente: cpf invalido." exibeContasClientes cpf=102487
+expectError "Erro ao exibir contas do cliente: cliente nao existe." exibeContasClientes cpf=12345678912
 
 adicionaCliente cpf=84591243910 nome="Joao McCree" email="joao_mccree@ccc.ufcg.edu.br" localizacao="SPG"
 
-expectError "Erro ao exibir contas do cliente: cliente nao tem nenhuma conta." cpf=84591243910
+expectError "Erro ao exibir contas do cliente: cliente nao tem nenhuma conta." exibeContasClientes cpf=84591243910
 

@@ -1,6 +1,11 @@
 package br.com.lab05.saga.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
+
+import br.com.lab05.saga.comparators.ContaComparator;
 
 /**
  * Classe que contém a representação de um cliente, possui atributos de identificação única dos mesmos, assim como métodos de controle sobre os mesmos.
@@ -209,5 +214,47 @@ public class Cliente {
 		if(contas.isEmpty())
 			return false;
 		return true;
+	}
+
+	/**
+	 * @param fornecedor
+	 * @return
+	 */
+	public String exibirContas(String fornecedor) {
+		if(contas.containsKey(fornecedor)) {
+			
+			return fornecedor + contas.get(fornecedor).listarCompras();
+		}
+		else
+			throw new NullPointerException("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
+	}
+
+	/**
+	 * @return
+	 */
+	public String exibirContas() {
+		/* Editar este método */
+		if(contas.isEmpty())
+			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
+		
+		Set<String> chaves = contas.keySet();
+		ArrayList<Conta> conts = new ArrayList<>();
+		
+		for (String chave : chaves) {
+			
+			conts.add(contas.get(chave));
+		}
+		
+		ContaComparator comparador = new ContaComparator();
+		Collections.sort(conts,comparador);
+		
+		String retorno = conts.get(0).toString();
+		
+		for(int i = 1; i < conts.size(); i++) {
+			
+			retorno += " | " + conts.get(i).listarCompras();
+		}
+		
+		return retorno;
 	}
 }

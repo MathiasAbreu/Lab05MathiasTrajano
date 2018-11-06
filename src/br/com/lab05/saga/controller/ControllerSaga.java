@@ -277,6 +277,9 @@ public class ControllerSaga {
 	 */
 	public String getDebito(String cpf, String fornecedor) {
 		
+		if(fornecedor == null || fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
+		
 		try {
 			
 			controlerFornecedor.buscarFornecedor(fornecedor);
@@ -286,6 +289,37 @@ public class ControllerSaga {
 			throw new NullPointerException("Erro ao recuperar debito: fornecedor nao existe.");
 		}
 		return controlerCliente.getDebito(cpf,fornecedor);
+	}
+
+	/**
+	 * @param cpf
+	 * @param fornecedor
+	 * @return
+	 */
+	public String exibirContas(String cpf, String fornecedor) {
+		
+		if(fornecedor == null || fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.");
+		
+		try {
+			
+			controlerFornecedor.buscarFornecedor(fornecedor);
+			
+		} catch (NullPointerException err) {
+			
+			throw new NullPointerException("Erro ao exibir conta do cliente: fornecedor nao existe.");
+		}
+		
+		return controlerCliente.exibirContas(cpf,fornecedor);
+	}
+
+	/**
+	 * @param cpf
+	 * @return
+	 */
+	public String exibirContas(String cpf) {
+		
+		return controlerCliente.exibirContas(cpf);
 	}
 	
 	

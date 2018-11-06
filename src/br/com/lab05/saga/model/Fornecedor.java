@@ -438,7 +438,7 @@ public class Fornecedor {
 		String[] produto2 = produtos_separados[1].split(" - ");
 			
 		if(verificaCombo(produto1[0],produto1[1]) || verificaCombo(produto2[0],produto2[1]))
-			throw new IllegalArgumentException("Erro no cadastro de combo: um combo n�o pode possuir combos na lista de produtos.");
+			throw new IllegalArgumentException("Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
 		
 		if(verificaProduto(produto1[0],produto1[1]) && verificaProduto(produto2[0],produto2[1]))
 			produtos.add(new Combo(nome,descricao,fator,buscarProduto(produto1[0],produto1[1]),buscarProduto(produto2[0],produto2[1])));

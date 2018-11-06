@@ -288,6 +288,16 @@ public class SagaFacade {
 		return controlerSaga.getDebito(cpf,fornecedor);
 	}
 	
+	public String exibeContas(String cpf,String fornecedor) {
+		
+		return controlerSaga.exibirContas(cpf,fornecedor);
+	}
+	
+	public String exibeContasClientes(String cpf) {
+		
+		return controlerSaga.exibirContas(cpf);
+	}
+	
 	public static void main(String[] args) {
 		
 		args = new String[] {"br.com.lab05.saga.facade.SagaFacade",

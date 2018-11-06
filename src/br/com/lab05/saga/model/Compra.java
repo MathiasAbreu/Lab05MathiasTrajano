@@ -84,6 +84,16 @@ public class Compra {
 	public void setPreco(double preco) {
 		this.preco = preco;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		
+		String[] data = dataCompra.split("/");
+		return nomeProduto + " - " + String.format("%s-%s-%s",data[0],data[1],data[2]);
+	}
 	
 	
 }
