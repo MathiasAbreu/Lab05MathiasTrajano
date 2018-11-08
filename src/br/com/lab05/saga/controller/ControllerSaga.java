@@ -335,6 +335,16 @@ public class ControllerSaga {
 		controlerCliente.quitarDebito(cpf,fornecedor);
 		
 	}
+
+	public String listarCompras() {
+		
+		return controlerCliente.listarCompras();
+	}
+
+	public void ordenarPor(String criterio) {
+		controlerCliente.ordenarPor(criterio);
+		
+	}
 	
 	
 }

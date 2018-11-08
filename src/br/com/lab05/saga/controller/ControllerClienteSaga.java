@@ -272,4 +272,24 @@ public class ControllerClienteSaga {
 		else
 			throw new NullPointerException("Erro no pagamento de conta: cliente nao existe.");
 	}
+
+	public void ordenarPor(String criterio) {
+		
+		if(criterio == null || criterio.trim().isEmpty())
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.");
+		
+		if(criterio.equals("Cliente"))
+			
+		if(criterio.equals("Fornecedor"))
+			
+		if(criterio.equals("Data"))
+			
+		throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
+		
+	}
+
+	public String listarCompras() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
