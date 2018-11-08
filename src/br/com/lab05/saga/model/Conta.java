@@ -3,6 +3,7 @@ package br.com.lab05.saga.model;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
 
 /**
@@ -14,20 +15,40 @@ import java.util.Locale;
  */
 public class Conta {
 
+	private String cliente;
 	private String fornecedor;
 	private double debitoTotal;
 
 	private ArrayList<Compra> compras;
 	
-	public Conta(String fornecedor) {
+	public Conta(String fornecedor,String cliente) {
 		
 		if(fornecedor == null || fornecedor.trim().isEmpty())
 			throw new IllegalArgumentException("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
 		
 		this.fornecedor = fornecedor;
+		this.cliente = cliente;
 		
 		compras = new ArrayList<>();
 	}
+
+	/**
+	 * @return the cliente
+	 */
+	public String getCliente() {
+		return cliente;
+	}
+
+
+
+	/**
+	 * @param cliente the cliente to set
+	 */
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
+
 
 	/**
 	 * @return the fornecedor
@@ -51,7 +72,7 @@ public class Conta {
 	 */
 	public void adicionarCompra(String data, String nome_prod, String desc_prod, double preco) {
 
-		compras.add(new Compra(data,nome_prod,desc_prod,preco));
+		compras.add(new Compra(cliente,fornecedor,data,nome_prod,desc_prod,preco));
 		debitoTotal += preco;
 	}
 
@@ -79,6 +100,14 @@ public class Conta {
 		}
 		
 		return retorno;
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<Compra> getCompras() {
+		
+		return compras;
 	}
 	
 }

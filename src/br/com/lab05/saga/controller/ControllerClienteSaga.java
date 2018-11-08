@@ -2,11 +2,16 @@ package br.com.lab05.saga.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Set;
 
 import br.com.lab05.saga.comparators.ClienteComparator;
+import br.com.lab05.saga.comparators.ClienteCompraComparator;
+import br.com.lab05.saga.comparators.DataCompraComparator;
+import br.com.lab05.saga.comparators.FornecedorCompraComparator;
 import br.com.lab05.saga.model.Cliente;
+import br.com.lab05.saga.model.Compra;
 
 /**
  * Representação do controle de clientes, esta classe possui a coleção responsável pelo armazenamento 
@@ -17,6 +22,8 @@ import br.com.lab05.saga.model.Cliente;
  */
 public class ControllerClienteSaga {
 		
+	private Comparator<Compra> comparador;
+	
 	/**
 	 * Coleção responsável pelo armazenamento dos clientes.
 	 */
@@ -278,18 +285,93 @@ public class ControllerClienteSaga {
 		if(criterio == null || criterio.trim().isEmpty())
 			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.");
 		
-		if(criterio.equals("Cliente"))
+		if(criterio.equals("Cliente") || criterio.equals("Fornecedor") || criterio.equals("Data")) {
+			if(criterio.equals("Cliente"))
+				comparador = new ClienteCompraComparator();
 			
-		if(criterio.equals("Fornecedor"))
-			
-		if(criterio.equals("Data"))
-			
-		throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
-		
+			if(criterio.equals("Fornecedor"))
+				comparador = new FornecedorCompraComparator();
+				
+			if(criterio.equals("Data"))
+				comparador = new DataCompraComparator();
+		}
+		else
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
 	}
 
 	public String listarCompras() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Set<String> chaves = clientes.keySet();
+
+		ArrayList<Compra> listaCompras = new ArrayList<>();
+		
+		for (String chave : chaves) {
+			
+			listaCompras.addAll(clientes.get(chave).getCompras());
+		}
+		
+		Collections.sort(listaCompras,comparador);
+				
+		if(comparador.getClass() == ClienteCompraComparator.class)
+			return listarPorCliente(listaCompras);
+		
+		if(comparador.getClass() == FornecedorCompraComparator.class)
+			return listarPorFornecedor(listaCompras);
+		
+		if(comparador.getClass() == DataCompraComparator.class)
+			return listarPorData(listaCompras);
+		
+		throw new NullPointerException("Ocorreu um erro na listagem!");
+	}
+
+	/**
+	 * @param listaCompras
+	 * @return
+	 */
+	private String listarPorData(ArrayList<Compra> listaCompras) {
+		
+		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getDataCompra(),listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getDescricaoProduto());
+		System.out.println(retorno);
+		for (int i = 1; i < listaCompras.size(); i++) {
+			
+			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto());
+			System.out.print(" | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto()) + "\n");
+
+		}
+		
+		return retorno;
+	}
+
+	/**
+	 * @param listaCompras
+	 * @return
+	 */
+	private String listarPorFornecedor(ArrayList<Compra> listaCompras) {
+		
+		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getDescricaoProduto(),listaCompras.get(0).getDataCompra());
+		
+		for (int i = 1; i < listaCompras.size(); i++) {
+			
+			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getDescricaoProduto(),listaCompras.get(i).getDataCompra());
+		}
+		
+		return retorno;
+	}
+
+	/**
+	 * @param listaCompras
+	 * @return
+	 */
+	private String listarPorCliente(ArrayList<Compra> listaCompras) {
+		
+		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getDescricaoProduto(),listaCompras.get(0).getDataCompra());
+		//System.out.println(retorno);
+		for (int i = 1; i < listaCompras.size(); i++) {
+			
+			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto(),listaCompras.get(i).getDataCompra());
+			//System.out.println(" | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto(),listaCompras.get(i).getDataCompra()) + "\n");
+		}
+		
+		return retorno;
 	}
 }

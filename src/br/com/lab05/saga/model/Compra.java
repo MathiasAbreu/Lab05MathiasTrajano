@@ -10,6 +10,9 @@ package br.com.lab05.saga.model;
  */
 public class Compra {
 
+	private String nomeCliente;
+	private String nomeFornecedor;
+	
 	private String dataCompra;
 	private String nomeProduto;
 	private String descricaoProduto;
@@ -21,12 +24,43 @@ public class Compra {
 	 * @param preco
 	 * @param produto
 	 */
-	public Compra(String dataCompra,String nomeProduto,String descricaoProduto, double preco) {
-				
+	public Compra(String nomeCliente,String nomeFornecedor,String dataCompra,String nomeProduto,String descricaoProduto, double preco) {
+		
+		this.nomeCliente = nomeCliente;
+		this.nomeFornecedor = nomeFornecedor;
+		
 		this.dataCompra = dataCompra;
 		this.nomeProduto = nomeProduto;
 		this.descricaoProduto = descricaoProduto;
 		this.preco = preco;
+	}
+
+	/**
+	 * @return the nomeCliente
+	 */
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	/**
+	 * @param nomeCliente the nomeCliente to set
+	 */
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	/**
+	 * @return the nomeFornecedor
+	 */
+	public String getNomeFornecedor() {
+		return nomeFornecedor;
+	}
+
+	/**
+	 * @param nomeFornecedor the nomeFornecedor to set
+	 */
+	public void setNomeFornecedor(String nomeFornecedor) {
+		this.nomeFornecedor = nomeFornecedor;
 	}
 
 	/**

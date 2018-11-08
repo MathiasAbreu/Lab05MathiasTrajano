@@ -1,6 +1,7 @@
 package br.com.lab05.saga.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
@@ -188,7 +189,7 @@ public class Cliente {
 			contas.get(fornecedor).adicionarCompra(data,nome_prod,desc_prod,preco);
 		}
 		else {
-			contas.put(fornecedor,new Conta(fornecedor));
+			contas.put(fornecedor,new Conta(fornecedor,nome));
 			contas.get(fornecedor).adicionarCompra(data, nome_prod, desc_prod, preco);
 		}
 	}
@@ -233,7 +234,7 @@ public class Cliente {
 	 * @return
 	 */
 	public String exibirContas() {
-		/* Editar este método */
+
 		if(contas.isEmpty())
 			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
 		
@@ -267,5 +268,21 @@ public class Cliente {
 		else
 			throw new NullPointerException("Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
 		
+	}
+
+	/**
+	 * @return
+	 */
+	public ArrayList<Compra> getCompras() {
+		
+		Set<String> chaves = contas.keySet();
+		ArrayList<Compra> compras = new ArrayList<>();
+		
+		for (String chave : chaves) {
+		
+			compras.addAll(contas.get(chave).getCompras());
+		}
+		
+		return compras;
 	}
 }
