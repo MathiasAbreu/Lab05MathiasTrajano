@@ -1,17 +1,46 @@
 # Parte 3 do SAGA - US7.
 
-# Listando compras de um cliente.
+## Listando compras de um cliente.
+
+### Populando com mais dados.
+
+fornecedor5=adicionaFornecedor nome="Joabe" email="joabecompena@gmail.com" telefone="83 90036-5012"
+fornecedor6=adicionaFornecedor nome="Severo" email="seusevero@hotmail.com" telefone="83 7898-4565"
+cliente6=adicionaCliente cpf=12312312312 nome="Joao Neto" email="joao.neto@ccc.ufcg.edu.br" localizacao="LIA"
+cliente7=adicionaCliente cpf=45645645645 nome="Dalto" email="dalto@gmail.com" localizacao="SPLAB"
+cliente8=adicionaCliente cpf=78978978978 nome="Zana" email="zanazaninha@bol.com" localizacao="LSI"
+
+adicionaProduto fornecedor="Joabe" nome="Bolo de Chocolate" descricao="Bolo de trigo com cobertura de chocolate" preco=2.00
+adicionaProduto fornecedor="Joabe" nome="Trufa de Beijinho" descricao="Doce sabor beijinho" preco=1.50
+adicionaProduto fornecedor="Severo" nome="Cocada de Amendoin" descricao="Cocada de doce de leite com pedacos de amendoin" preco=1.50
+adicionaProduto fornecedor="Severo" nome="Agua" descricao="Garrafa de agua 500ml" preco=1.00
+adicionaCombo fornecedor="Joabe" nome="Bolo de Chocolate + Trufa de Beijinho" descricao="Um Bolo e uma Trufa" fator=0.10 produtos="Bolo de Chocolate - Bolo de trigo com cobertura de chocolate, Trufa de Beijinho - Doce sabor beijinho"
+adicionaCombo fornecedor="Severo" nome="Cocada com Agua" descricao="Cocada de doce de leite com amendoin e água gelada" fator=0.25 produtos="Cocada de Amendoin - Cocada de doce de leite com pedacos de amendoin, Agua - Garrafa de agua 500ml"
+
+adicionaCompra cpf=12312312312 fornecedor="Joabe" data="08/11/2018" nome_prod="Bolo de Chocolate" desc_prod="Bolo de trigo com cobertura de chocolate"
+adicionaCompra cpf=12312312312 fornecedor="Joabe" data="07/11/2018" nome_prod="Trufa de Beijinho" desc_prod="Doce sabor beijinho"
+adicionaCompra cpf=12312312312 fornecedor="Severo" data="08/11/2018" nome_prod="Agua" desc_prod="Garrafa de agua 500ml"
+adicionaCompra cpf=45645645645 fornecedor="Joabe" data="06/11/2018" nome_prod="Bolo de Chocolate + Trufa de Beijinho" desc_prod="Um Bolo e uma Trufa"
+adicionaCompra cpf=78978978978 fornecedor="Severo" data="05/11/2018" nome_prod="Cocada de Amendoin" desc_prod="Cocada de doce de leite com pedacos de amendoin"
+adicionaCompra cpf=45645645645 fornecedor="Severo" data="04/11/2018" nomr_prod="Cocada com Agua" desc_prod="Cocada de doce de leite com amendoin e água gelada"
+
+### Listando compras ordenadas por cliente em ordem alfabética crescente.
 
 ordenaPor criterio="Cliente"
-expect "João Neto, Dona Inês, Lanche FIT, 01-11-2018 | João Neto, Dona Inês, Salada, 29-10-2018 | João Neto, Josenilda, Biscoito salgado, 01-11-2018 | João Neto, Josenilda, Promo 1, 28-10-2018 | Kleberson, Josenilda, Promo 1, 15-05-2018 | Zana, Dona Inês, Lanche FIT, 10-06-2018" listarCompras
+
+expect "Amigao Fernandes, Marcos, Coxao de frango com batata frita, 03/12/2013 | Amigao Fernandes, Marcos, Refrigerante (lata), 03/06/2017 | Ana Amari, Marcos, Coxao de frango com cheddar, 01/11/2016 | Ana Amari, Marcos, Refrigerante (lata), 03/06/2017 | Ana Amari, Seu Olavo, Suco de maracuja (copo), 02/04/2015 | Dalto, Joabe, Um Bolo e uma Trufa, 06/11/2018 | Dalto, Severo, Cocada de doce de leite com amendoin e água gelada, 04/11/2018 | Joao Neto, Joabe, Bolo de trigo com cobertura de chocolate, 08/11/2018 | Joao Neto, Joabe, Doce sabor beijinho, 07/11/2018 | Joao Neto, Severo, Garrafa de agua 500ml, 08/11/2018 | Lucio Correia, Dona Alba, Feijao com arroz e queijo coalho, 11/11/2011 | Lucio Correia, Marcos, Coxao de frango com presunto e queijo, 07/04/1998 | Lucio Correia, Marcos, Refrigerante (lata), 11/12/1998 | Zana, Severo, Cocada de doce de leite com pedacos de amendoin, 05/11/2018" listarCompras
+
+### Listando compras ordenadas por fornecedor em ordem alfabética crescente.
 
 ordenaPor criterio="Fornecedor" 
-expect "Dona Inês, João Neto, Lanche FIT, 01-11-2018 | Dona Inês, João Neto, Salada, 29-10-2018 | Dona Inês, Zana, João Neto, Lanche FIT, 10-06-2018 | Josenilda, João Neto, Biscoito salgado, 01-11-2018 | Josenilda, João Neto, Promo 1, 28-10-2018 | Josenilda, Kleberson Promo 1, 15-05-2018" listarCompras
+expect "" listarCompras
 
+### Listando compras ordenadas por Data em ordem crescente (da mais antiga para a mais atual).
 ordenaPor criterio="Data"
-expect "15-05-2018, Kleberson, Josenilda, Promo 1 | 10-06-2018, Zana, Dona Inês, Lanche FIT | 28-10-2018, João Neto, Josenilda, Promo 1 | 29-10-2018, João Neto, Dona Inês, Salada | 01-11-2018, João Neto, Dona Inês, Lanche FIT | 01-11-2018, João Neto, Josenilda, Biscoito salgado" listarCompras
+expect "" listarCompras
 
-# Verificando exceções
+## Verificando exceções.
 
 expectError "Erro na listagem de compras: criterio nao oferecido pelo sistema." ordenaPor criterio="Descricao"
 expectError "Erro na listagem de compras: criterio nao pode ser vazio ou nulo." ordenaPor criterio=""
+expectError "Erro na listagem de compras: criterio nao pode ser vazio ou nulo." ordenaPor criterio=
