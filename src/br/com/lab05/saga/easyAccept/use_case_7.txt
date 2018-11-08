@@ -1,0 +1,17 @@
+# Parte 3 do SAGA - US7.
+
+# Listando compras de um cliente.
+
+ordenaPor criterio="Cliente"
+expect "João Neto, Dona Inês, Lanche FIT, 01-11-2018 | João Neto, Dona Inês, Salada, 29-10-2018 | João Neto, Josenilda, Biscoito salgado, 01-11-2018 | João Neto, Josenilda, Promo 1, 28-10-2018 | Kleberson, Josenilda, Promo 1, 15-05-2018 | Zana, Dona Inês, Lanche FIT, 10-06-2018" listarCompras
+
+ordenaPor criterio="Fornecedor" 
+expect "Dona Inês, João Neto, Lanche FIT, 01-11-2018 | Dona Inês, João Neto, Salada, 29-10-2018 | Dona Inês, Zana, João Neto, Lanche FIT, 10-06-2018 | Josenilda, João Neto, Biscoito salgado, 01-11-2018 | Josenilda, João Neto, Promo 1, 28-10-2018 | Josenilda, Kleberson Promo 1, 15-05-2018" listarCompras
+
+ordenaPor criterio="Data"
+expect "15-05-2018, Kleberson, Josenilda, Promo 1 | 10-06-2018, Zana, Dona Inês, Lanche FIT | 28-10-2018, João Neto, Josenilda, Promo 1 | 29-10-2018, João Neto, Dona Inês, Salada | 01-11-2018, João Neto, Dona Inês, Lanche FIT | 01-11-2018, João Neto, Josenilda, Biscoito salgado" listarCompras
+
+# Verificando exceções
+
+expectError "Erro na listagem de compras: criterio nao oferecido pelo sistema." ordenaPor criterio="Descricao"
+expectError "Erro na listagem de compras: criterio nao pode ser vazio ou nulo." ordenaPor criterio=""

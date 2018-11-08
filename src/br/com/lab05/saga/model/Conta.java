@@ -15,6 +15,7 @@ import java.util.Locale;
 public class Conta {
 
 	private String fornecedor;
+	private double debitoTotal;
 
 	private ArrayList<Compra> compras;
 	
@@ -51,6 +52,7 @@ public class Conta {
 	public void adicionarCompra(String data, String nome_prod, String desc_prod, double preco) {
 
 		compras.add(new Compra(data,nome_prod,desc_prod,preco));
+		debitoTotal += preco;
 	}
 
 	/**
@@ -58,17 +60,11 @@ public class Conta {
 	 */
 	public String getDebito() {
 		
-		double debito = 0;
-		for (int i = 0; i < compras.size(); i++) {
-			
-			debito += compras.get(i).getPreco();
-		}
-		
 		DecimalFormatSymbols formatSymbols = new DecimalFormatSymbols(Locale.getDefault());
 		formatSymbols.setDecimalSeparator('.');
 		DecimalFormat df = new DecimalFormat("#.00",formatSymbols);
 		
-		return df.format(debito);
+		return df.format(debitoTotal);
 	}
 
 	/**
@@ -84,6 +80,5 @@ public class Conta {
 		
 		return retorno;
 	}
-	
 	
 }

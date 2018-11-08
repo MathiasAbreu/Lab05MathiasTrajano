@@ -11,6 +11,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/mathias/Downloads/easyaccept.jar"/>
+	<classpathentry kind="lib" path="/home/mathiasat/Downloads/easyaccept.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

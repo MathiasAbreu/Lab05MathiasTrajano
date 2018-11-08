@@ -78,7 +78,7 @@ public class ControllerSaga {
 		if(nome_prod == null || nome_prod.trim().isEmpty())
 			throw new IllegalArgumentException("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
 		if(desc_prod == null || desc_prod.trim().isEmpty())
-			throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula");
+			throw new IllegalArgumentException("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
 		if(data == null || data.trim().isEmpty())
 			throw new IllegalArgumentException("Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
 		
@@ -317,6 +317,23 @@ public class ControllerSaga {
 	public String exibirContas(String cpf) {
 		
 		return controlerCliente.exibirContas(cpf);
+	}
+
+	public void quitarDebito(String cpf, String fornecedor) {
+		if(fornecedor == null || fornecedor.trim().isEmpty())
+			throw new IllegalArgumentException("Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
+		
+		try {
+			
+			controlerFornecedor.buscarFornecedor(fornecedor);
+		
+		} catch (NullPointerException err) {
+		
+			throw new NullPointerException("Erro no pagamento de conta: fornecedor nao existe.");
+		}
+		
+		controlerCliente.quitarDebito(cpf,fornecedor);
+		
 	}
 	
 	

@@ -1,7 +1,6 @@
 package br.com.lab05.saga.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 import br.com.lab05.saga.comparators.ProdutoComparator;

@@ -298,6 +298,11 @@ public class SagaFacade {
 		return controlerSaga.exibirContas(cpf);
 	}
 	
+	public void realizaPagamento(String cpf,String fornecedor) {
+		
+		controlerSaga.quitarDebito(cpf,fornecedor);
+	}
+	
 	public static void main(String[] args) {
 		
 		args = new String[] {"br.com.lab05.saga.facade.SagaFacade",
@@ -305,7 +310,8 @@ public class SagaFacade {
 							 "src/br/com/lab05/saga/easyAccept/use_case_2.txt",
 							 "src/br/com/lab05/saga/easyAccept/use_case_3.txt",
 							 "src/br/com/lab05/saga/easyAccept/use_case_4.txt",
-							 "src/br/com/lab05/saga/easyAccept/use_case_5.txt"};
+							 "src/br/com/lab05/saga/easyAccept/use_case_5.txt",
+							 "src/br/com/lab05/saga/easyAccept/use_case_6.txt"};
 		EasyAccept.main(args);
 	}
 }

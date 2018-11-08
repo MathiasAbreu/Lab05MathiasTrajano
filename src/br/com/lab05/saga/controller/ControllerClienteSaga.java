@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
-import javax.management.RuntimeErrorException;
-
 import br.com.lab05.saga.comparators.ClienteComparator;
 import br.com.lab05.saga.model.Cliente;
 
@@ -258,5 +256,20 @@ public class ControllerClienteSaga {
 		}
 		else
 			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao existe.");
+	}
+
+	public void quitarDebito(String cpf, String fornecedor) {
+		
+		if(cpf == null || cpf.trim().isEmpty())
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.");
+		if(cpf.length() != 11)
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf invalido.");
+	
+		if(clientes.containsKey(cpf)) {
+			
+			clientes.get(cpf).quitarDebito(fornecedor);
+		}
+		else
+			throw new NullPointerException("Erro no pagamento de conta: cliente nao existe.");
 	}
 }

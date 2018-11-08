@@ -258,4 +258,14 @@ public class Cliente {
 		
 		return retorno;
 	}
+
+	public void quitarDebito(String fornecedor) {
+		if(contas.containsKey(fornecedor)) {
+			
+			contas.remove(fornecedor);
+		}
+		else
+			throw new NullPointerException("Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
+		
+	}
 }
