@@ -9,6 +9,9 @@ package br.com.lab05.saga.model;
  */
 public class ProdutoSimples extends Produto {
 
+	/**
+	 * Preço do Produto
+	 */
 	private double preco;
 	
 	/** 
@@ -37,6 +40,11 @@ public class ProdutoSimples extends Produto {
 		this.preco = preco;
 	}
 	
+	/**
+	 * Método que retorna o preço do produto.
+	 * 
+	 * @return Retorna o preço do produto.
+	 */
 	public double getPreco() {
 		return preco;
 	}
@@ -50,6 +58,11 @@ public class ProdutoSimples extends Produto {
 		this.preco = preco;
 	}
 	
+	/**
+	 * Método que retorna um representação do produto.
+	 * 
+	 * @return Retorna uma representação, em String, de um produto.
+	 */
 	@Override
 	public String toString() {
 		return String.format("%s - %s - R$%.2f",nome,descricao,preco);

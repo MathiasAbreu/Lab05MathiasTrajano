@@ -178,10 +178,14 @@ public class Cliente {
 	}
 
 	/**
-	 * @param fornecedor
-	 * @param data
-	 * @param nome_prod
-	 * @param desc_prod
+	 * Método que adiciona uma nova compra ao cliente específico, ele recebe todos os dados essenciais da compra e 
+	 * insere a nova compra na coleção responsável pelo armazenamento das mesmas.
+	 * 
+	 * @param fornecedor fornecedor do produto
+	 * @param data data da compra
+	 * @param nome_prod nome do produto comprado
+	 * @param desc_prod descricao do produto comprado
+	 * @param preco preço do produto comprado
 	 */
 	public void adicionarCompra(String fornecedor, String data, String nome_prod, String desc_prod,double preco) {
 
@@ -195,8 +199,13 @@ public class Cliente {
 	}
 
 	/**
-	 * @param fornecedor
-	 * @return
+	 * Método que retorna o débito acumulado de uma conta especifica.
+	 * 
+	 * @param fornecedor fornecedor dos produtos comprados
+	 * 
+	 * @return Retorna o valor formatado, em String, das compras.
+	 * 
+	 * @throws NullPointerException Exceção gerada caso não haja debito com o determinado fornecedor.
 	 */
 	public String getDebito(String fornecedor) {
 		
@@ -209,7 +218,9 @@ public class Cliente {
 	}
 
 	/**
-	 * @return
+	 * Método que serve para verificar se o cliente possui contas.
+	 * 
+	 * @return Retorna um valor booleano confirmando ou não a existência de debitos.
 	 */
 	public boolean contemDebitos() {
 		if(contas.isEmpty())
@@ -218,8 +229,13 @@ public class Cliente {
 	}
 
 	/**
-	 * @param fornecedor
-	 * @return
+	 * Método que exibe todas as compras feitas com um determinado fornecedor.
+	 * 
+	 * @param fornecedor fornecedor dos produtos
+	 * 
+	 * @return Retorna uma representação de todas as compras.
+	 * 
+	 * @throws NullPointerException Gera essa exceção caso não haja compras com determinado fornecedor.
 	 */
 	public String exibirContas(String fornecedor) {
 		if(contas.containsKey(fornecedor)) {
@@ -231,7 +247,11 @@ public class Cliente {
 	}
 
 	/**
-	 * @return
+	 * Método que exibe todo o extrato de contas e compras do cliente, independente de quais sejam os fornecedores.
+	 * 
+	 * @return Retorna uma representação textual de todas as compras deste cliente.
+	 * 
+	 * @throws NullPointerException Exceção gerada caso o cliente não tenha nenhuma conta em aberto.
 	 */
 	public String exibirContas() {
 
@@ -260,6 +280,14 @@ public class Cliente {
 		return retorno;
 	}
 
+	/**
+	 * Este método quita os debitos de determinada conta.
+	 * 
+	 * @param fornecedor fornecedor dos produtos comprados
+	 * 
+	 * @throws NullPointerException Esta exceção é gerada caso não haja uma conta associada ao fornecedor 
+	 * recebido pelo método.
+	 */
 	public void quitarDebito(String fornecedor) {
 		if(contas.containsKey(fornecedor)) {
 			
@@ -271,7 +299,9 @@ public class Cliente {
 	}
 
 	/**
-	 * @return
+	 * Método que repassa todas as compras cadastradas deste cliente.
+	 * 
+	 * @return Retorna uma coleção com todas as compras.
 	 */
 	public ArrayList<Compra> getCompras() {
 		

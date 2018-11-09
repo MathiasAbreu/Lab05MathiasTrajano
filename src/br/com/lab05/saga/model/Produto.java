@@ -7,7 +7,7 @@ package br.com.lab05.saga.model;
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
  * 
  */
-public class Produto {
+public abstract class Produto {
 
 	/**
 	 * Nome do Produto.
@@ -19,6 +19,12 @@ public class Produto {
 	 */
 	protected String descricao;
 
+	/**
+	 * Construtor responsável pela instanciação da super classe Produto. Recebe os parâmetros básicos do Produto.
+	 * 
+	 * @param nome nome do produto
+	 * @param descricao descricao do produto
+	 */
 	public Produto(String nome,String descricao) {
 		
 		this.nome = nome;
@@ -42,12 +48,6 @@ public class Produto {
 	public String getDescricao() {
 		return descricao;
 	}
-	
-	/**
-	 * Método que retorna o preço do produto.
-	 * 
-	 * @return O preço do produto.
-	 */
 	
 	/**
 	 * Método que transforma um Produto em uma representação em inteiro.
@@ -82,14 +82,5 @@ public class Produto {
 		
 		return false;
 	}
-	
-	/**
-	 * Método responsável pela impressão dos dados de um produto.
-	 * 
-	 * @return Retorna uma representação de um produto.
-	 */
-	@Override
-	public String toString() {
-		return String.format("%s - %s",nome,descricao);
-	}
+
 }

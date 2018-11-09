@@ -10,8 +10,6 @@ import br.com.lab05.saga.model.ProdutoSimples;
  * da impressão dos mesmos em alguns métodos.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
- * 
- * 
  */
 public class ProdutoComparator implements Comparator<Produto> {
 

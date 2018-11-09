@@ -15,7 +15,7 @@ adicionaProduto fornecedor="Joabe" nome="Trufa de Beijinho" descricao="Doce sabo
 adicionaProduto fornecedor="Severo" nome="Cocada de Amendoin" descricao="Cocada de doce de leite com pedacos de amendoin" preco=1.50
 adicionaProduto fornecedor="Severo" nome="Agua" descricao="Garrafa de agua 500ml" preco=1.00
 adicionaCombo fornecedor="Joabe" nome="Bolo de Chocolate + Trufa de Beijinho" descricao="Um Bolo e uma Trufa" fator=0.10 produtos="Bolo de Chocolate - Bolo de trigo com cobertura de chocolate, Trufa de Beijinho - Doce sabor beijinho"
-adicionaCombo fornecedor="Severo" nome="Cocada com Agua" descricao="Cocada de doce de leite com amendoin e aua gelada" fator=0.25 produtos="Cocada de Amendoin - Cocada de doce de leite com pedacos de amendoin, Agua - Garrafa de agua 500ml"
+adicionaCombo fornecedor="Severo" nome="Cocada com Agua" descricao="Cocada de doce de leite com amendoin e agua gelada" fator=0.25 produtos="Cocada de Amendoin - Cocada de doce de leite com pedacos de amendoin, Agua - Garrafa de agua 500ml"
 
 adicionaCompra cpf=12312312312 fornecedor="Joabe" data="08/11/2018" nome_prod="Bolo de Chocolate" desc_prod="Bolo de trigo com cobertura de chocolate"
 adicionaCompra cpf=12312312312 fornecedor="Joabe" data="07/11/2018" nome_prod="Trufa de Beijinho" desc_prod="Doce sabor beijinho"

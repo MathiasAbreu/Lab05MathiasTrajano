@@ -5,7 +5,6 @@ package br.com.lab05.saga.model;
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
  * 
- * 
  */
 public class Combo extends Produto {
 	

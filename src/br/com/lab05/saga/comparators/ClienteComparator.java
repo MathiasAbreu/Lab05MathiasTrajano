@@ -3,14 +3,11 @@ package br.com.lab05.saga.comparators;
 import java.util.Comparator;
 
 import br.com.lab05.saga.model.Cliente;
-
 /** 
  * Classe utilizada para comparar objetos do tipo {@link Cliente} com função principal de ordenar os clientes no momento 
  * da impressão dos mesmos em alguns métodos.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
- * 
- * 
  */
 public class ClienteComparator implements Comparator<Cliente> {
 	

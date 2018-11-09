@@ -22,6 +22,9 @@ import br.com.lab05.saga.model.Compra;
  */
 public class ControllerClienteSaga {
 		
+	/**
+	 * Comparador estratégico utilizado para ordenar de formas diversas em tempo de execução.
+	 */
 	private Comparator<Compra> comparador;
 	
 	/**
@@ -30,7 +33,7 @@ public class ControllerClienteSaga {
 	private static HashMap<String,Cliente> clientes;
 	
 	/**
-	 * Cosntrutor responsável pela inicialização da classe.
+	 * Construtor responsável pela inicialização da classe.
 	 */
 	public ControllerClienteSaga() {
 		
@@ -331,11 +334,11 @@ public class ControllerClienteSaga {
 	private String listarPorData(ArrayList<Compra> listaCompras) {
 		
 		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getDataCompra(),listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getDescricaoProduto());
-		System.out.println(retorno);
+		//System.out.println(retorno);
 		for (int i = 1; i < listaCompras.size(); i++) {
 			
 			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto());
-			System.out.print(" | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto()) + "\n");
+			//System.out.print(" | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto()) + "\n");
 
 		}
 		

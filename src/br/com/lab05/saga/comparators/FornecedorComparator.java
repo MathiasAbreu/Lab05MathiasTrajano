@@ -9,8 +9,6 @@ import br.com.lab05.saga.model.Fornecedor;
  * da impressão dos mesmos em alguns métodos.
  * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
- * 
- *
  */
 public class FornecedorComparator implements Comparator<Fornecedor> {
 

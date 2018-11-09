@@ -4,25 +4,52 @@
 package br.com.lab05.saga.model;
 
 /**
+ * Classe que representa uma conta, possui seus dados essenciais de identificação e os métodos capazes de controlar 
+ * e manipular tais dados.
+ * 
  * @author Mathias Abreu Trajano - mathias.trajano@ccc.ufcg.edu.br
- * 
- * 
  */
 public class Compra {
 
+	/**
+	 * Nome do cliente
+	 */
 	private String nomeCliente;
+	
+	/**
+	 * Nome do fornecedor
+	 */
 	private String nomeFornecedor;
 	
+	/**
+	 * Data da compra
+	 */
 	private String dataCompra;
+	
+	/**
+	 * Nome do Produto
+	 */
 	private String nomeProduto;
+	
+	/**
+	 * Descrição do Produto
+	 */
 	private String descricaoProduto;
 	
+	/**
+	 * Preço do Produto
+	 */
 	private double preco;
 	
 	/**
-	 * @param dataCompra
-	 * @param preco
-	 * @param produto
+	 * Construtor responsável pela instanciação de uma nova compra, ele recebe todos os dados necessários para 
+	 * criar um novo objeto do tipo conta.
+	 * 
+	 * @param nomeCliente nome do cliente
+	 * @param descricaoProduto descrição do produto
+	 * @param dataCompra deta da compra
+	 * @param preco preço da compra
+	 * @param produto produto da compra
 	 */
 	public Compra(String nomeCliente,String nomeFornecedor,String dataCompra,String nomeProduto,String descricaoProduto, double preco) {
 		
@@ -36,91 +63,63 @@ public class Compra {
 	}
 
 	/**
-	 * @return the nomeCliente
+	 * Método que retorna o nome do cliente.
+	 * 
+	 * @return O nome do Cliente.
 	 */
 	public String getNomeCliente() {
 		return nomeCliente;
 	}
 
 	/**
-	 * @param nomeCliente the nomeCliente to set
-	 */
-	public void setNomeCliente(String nomeCliente) {
-		this.nomeCliente = nomeCliente;
-	}
-
-	/**
-	 * @return the nomeFornecedor
+	 * Método que retorna o nome do fornecedor.
+	 * 
+	 * @return O nome do Fornecedor.
 	 */
 	public String getNomeFornecedor() {
 		return nomeFornecedor;
 	}
 
 	/**
-	 * @param nomeFornecedor the nomeFornecedor to set
-	 */
-	public void setNomeFornecedor(String nomeFornecedor) {
-		this.nomeFornecedor = nomeFornecedor;
-	}
-
-	/**
-	 * @return the dataCompra
+	 * Método que retorna a Data da Compra.
+	 * 
+	 * @return A data da compra.
 	 */
 	public String getDataCompra() {
 		return dataCompra;
 	}
 
 	/**
-	 * @param dataCompra the dataCompra to set
-	 */
-	public void setDataCompra(String dataCompra) {
-		this.dataCompra = dataCompra;
-	}
-
-	/**
-	 * @return the nomeProduto
+	 * Método que retorna o nome do Produto.
+	 * 
+	 * @return O nome do produto.
 	 */
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
 
 	/**
-	 * @param nomeProduto the nomeProduto to set
-	 */
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
-	}
-
-	/**
-	 * @return the descricaoProduto
+	 * Método que retorna a descrição do Produto.
+	 * 
+	 * @return A descrição do Produto.
 	 */
 	public String getDescricaoProduto() {
 		return descricaoProduto;
 	}
 
 	/**
-	 * @param descricaoProduto the descricaoProduto to set
-	 */
-	public void setDescricaoProduto(String descricaoProduto) {
-		this.descricaoProduto = descricaoProduto;
-	}
-
-	/**
-	 * @return the preco
+	 * Método que retorna o Preço da Compra.
+	 * 
+	 * @return O preço da compra.
 	 */
 	public double getPreco() {
 		return preco;
 	}
 
 	/**
-	 * @param preco the preco to set
-	 */
-	public void setPreco(double preco) {
-		this.preco = preco;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	 * Método responsável por retornar uma representação de um compra, informando seus dados principais.
+	 * 
+	 * @return Retorna uma representação, em String, da compra.
 	 */
 	@Override
 	public String toString() {

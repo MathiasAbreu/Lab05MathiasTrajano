@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import br.com.lab05.saga.controller.ControllerClienteSaga;
+import br.com.lab05.saga.controller.ControllerFornecedorSaga;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Fornecedor;
 
@@ -31,6 +32,8 @@ class ControllerClienteSagaTests {
 		
 		controle = new ControllerClienteSaga();
 		controle.cadastrarCliente("12345678901","Mathias","mathias.trajano","LSD");
+		controle.cadastrarCliente("13570493267","Wesley","wesley.mateus","LugaNenhum");
+		controle.cadastrarCliente("09876543211","Klaywert","klay.souza","LCC03");
 
 		
 	}
@@ -153,7 +156,7 @@ class ControllerClienteSagaTests {
 	}
 	
 	@Test
-	@DisplayName("Testando o metodo remover com um clinte inexistente")
+	@DisplayName("Testando o metodo remover com um cliente inexistente")
 	void testRemoverCliente02() {
 		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
 			
@@ -161,5 +164,35 @@ class ControllerClienteSagaTests {
 		});
 		
 		assertEquals("Impossível remover um cliente que não estava cadastrado!",npe.getMessage());
+	}
+	
+	@Test
+	@DisplayName("Testando o método de listar Compras")
+	void testListarCompras01() {
+		ControllerFornecedorSaga controlF = new ControllerFornecedorSaga();
+		
+		controlF.adicionarFornecedor("Matheus","matheus.trajano","83991847043");
+		controlF.adicionarFornecedor("Dona Inês","dona.ines","1234567890");
+		controlF.adicionarFornecedor("Seu Olavo","olavo.lanches","0987654321");
+	
+		controlF.adicionarProduto("Matheus","Arroz","Arroz Branco",3.50);
+		controlF.adicionarProduto("Seu Olavo","X-Frango","Sanduiche de Frango",5.50);
+		controlF.adicionarProduto("Dona Inês","X-Tudo","X-Infarto",5);
+		
+		controle.adicionarConta("12345678901","Matheus","11/10/2018","Arroz","Arroz Branco",3.50);
+		controle.adicionarConta("13570493267","Matheus","15/11/2018","Arroz","Arroz Branco",3.50);
+		
+		controle.adicionarConta("12345678901","Seu Olavo","12/12/2008","X-Frango","Sanduiche de Frango",5.50);
+		
+		controle.adicionarConta("09876543211","Dona Inês","18/01/1999","X-Tudo","X-Infarto",5);
+		
+		controle.ordenarPor("Cliente");
+		assertEquals("Klaywert, Dona Inês, X-Infarto, 18/01/1999 | Mathias, Matheus, Arroz Branco, 11/10/2018 | Mathias, Seu Olavo, Sanduiche de Frango, 12/12/2008 | Wesley, Matheus, Arroz Branco, 15/11/2018",controle.listarCompras());
+		
+		controle.ordenarPor("Fornecedor");
+		assertEquals("Dona Inês, Klaywert, X-Infarto, 18/01/1999 | Matheus, Wesley, Arroz Branco, 15/11/2018 | Matheus, Mathias, Arroz Branco, 11/10/2018 | Seu Olavo, Mathias, Sanduiche de Frango, 12/12/2008",controle.listarCompras());
+		
+		controle.ordenarPor("Data");
+		assertEquals("18/01/1999, Klaywert, Dona Inês, X-Infarto | 12/12/2008, Mathias, Seu Olavo, Sanduiche de Frango | 11/10/2018, Mathias, Matheus, Arroz Branco | 15/11/2018, Wesley, Matheus, Arroz Branco",controle.listarCompras());
 	}
 }
