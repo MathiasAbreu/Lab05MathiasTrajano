@@ -76,7 +76,8 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro na exibicao do fornecedor: fornecedor nao existe.");
 	}
 
-	/** Método que lista todos os fornecedores cadastrados no sistema, em ordem alfabetica.
+	/** 
+	 * Método que lista todos os fornecedores cadastrados no sistema, em ordem alfabetica.
 	 * 
 	 * @return Retorna uma representação de todos os clientes em ordem alfabética.
 	 * 
@@ -106,7 +107,8 @@ public class ControllerFornecedorSaga {
 		return retorno;
 	}
 
-	/** Método que realiza uma busca, e depois altera algum dos dados do fornecedor, 
+	/** 
+	 * Método que realiza uma busca, e depois altera algum dos dados do fornecedor, 
 	 * tanto o nome, como o dado a ser alterado e seu novo conteudo são passados no 
 	 * momento da chamado do método. Caso tentem editar algum dado inexistente ou de algum 
 	 * fornecedor não cadastrado, são geradas exceções.
@@ -156,7 +158,8 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro na edicao do fornecedor: fornecedor nao existe.");
 	}
 
-	/** Este método remove algum fornecedor que esteja cadastrado no sistema.
+	/** 
+	 * Este método remove algum fornecedor que esteja cadastrado no sistema.
 	 * 
 	 * @param nome nome do fornecedor a ser removido.
 	 * 
@@ -178,7 +181,8 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Impossível remover um fornecedor que não estava cadastrado!");
 	}
 
-	/** Método responsável pelo cadastramento de um novo produto no sistema. Ele recebe todo os dados do novo produto
+	/** 
+	 * Método responsável pelo cadastramento de um novo produto no sistema. Ele recebe todo os dados do novo produto
 	 * assim como o fornecedor de tal {@linkplain ProdutoSimples}. Caso algum dos dados seja inválido, ou o fornecedor em questão 
 	 * não exista, exceções são geradas.
 	 * 
@@ -239,7 +243,8 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro na exibicao de produto: fornecedor nao existe.");
 	}
 
-	/** Método responsável pela edição de determinado produto de um determinado fornecedor.
+	/** 
+	 * Método responsável pela edição de determinado produto de um determinado fornecedor.
 	 * 
 	 * @param nome nome do produto a ser editado.
 	 * @param descricao descricao do produto a ser editado.
@@ -313,7 +318,8 @@ public class ControllerFornecedorSaga {
 		return retorno;
 	}
 
-	/** Método responsável pela remoção de determinado produto do sistema.
+	/** 
+	 * Método responsável pela remoção de determinado produto do sistema.
 	 * 
 	 * @param nome nome do produto a ser removido
 	 * @param descricao descrição do produto a ser removido
@@ -338,7 +344,8 @@ public class ControllerFornecedorSaga {
 		throw new NullPointerException("Erro na remocao de produto: fornecedor nao existe.");
 	}
 
-	/** Método responsável por adicionar um novo combo no sistema. Ele recebe todos os parametros necessários para 
+	/** 
+	 * Método responsável por adicionar um novo combo no sistema. Ele recebe todos os parametros necessários para 
 	 * criação de tal combo, tais como nome, descricao e o fornecedor que fornece tal produto. Também pode gerar ex
 	 * ceções caso algum irregularidade seja encontrada.
 	 * 
@@ -365,7 +372,8 @@ public class ControllerFornecedorSaga {
 		
 	}
 
-	/** Método responsável pela edição de um combo no sistema, devido as limitações impostas, somente o fator de 
+	/** 
+	 * Método responsável pela edição de um combo no sistema, devido as limitações impostas, somente o fator de 
 	 * desconto pode ser alterado.
 	 * 
 	 * @param nome nome do combo
@@ -390,6 +398,17 @@ public class ControllerFornecedorSaga {
 		
 	}
 	
+	/**
+	 * Método que captura o preço de um produto, seja ele um {@link Combo} ou um {@link ProdutoSimples}.
+	 * 
+	 * @param fornecedor fornecedor do produto
+	 * @param nome nome do produto
+	 * @param descricao descrição do produto
+	 * 
+	 * @return Retorna o preço do produto.
+	 * 
+	 * @throws NullPointerException Essa exceção é gerada caso o produto não seja encontrado!
+	 */
 	public double getPrecoProduto(String fornecedor,String nome,String descricao) {
 		
 		Produto produto = fornecedores.get(fornecedor).buscarProduto(nome, descricao);

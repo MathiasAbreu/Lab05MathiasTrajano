@@ -197,11 +197,18 @@ public class ControllerClienteSaga {
 	}
 
 	/**
-	 * @param cpf
-	 * @param fornecedor
-	 * @param data
-	 * @param nome_prod
-	 * @param desc_prod
+	 * Método responsável pelo cadastro de uma nova compra no sistema, este método recebe todos os dados essenciais para a 
+	 * nova compra. O método verifica se já existe alguma conta para colocar a nova compra, se não existir uma nova conta 
+	 * deverá ser gerada.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor fornecedor do produto
+	 * @param data data da compra
+	 * @param nome_prod nome do produto
+	 * @param desc_prod descrição do produto
+	 * @param preco preço do produto
+	 * 
+	 * @throws NullPointerException Está exceção é gerada caso o cliente não seja localizado no sistema.
 	 */
 	public void adicionarConta(String cpf, String fornecedor, String data, String nome_prod, String desc_prod,double preco) {
 		
@@ -215,9 +222,15 @@ public class ControllerClienteSaga {
 	}
 
 	/**
-	 * @param cpf
-	 * @param fornecedor
-	 * @return
+	 * Método que retorna o débito total de determinada conta.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor fornecedor do cliente
+	 * 
+	 * @return Retorna o valor total do débito da conta.
+	 * 
+	 * @throws IllegalArgumentException Está exceção é gerada caso o cpf inserido seja inválido.
+	 * @throws NullPointerException Essa exceção é gerada caso o cliente não seja encontrado.
 	 */
 	public String getDebito(String cpf, String fornecedor) {
 		
@@ -234,9 +247,15 @@ public class ControllerClienteSaga {
 	}
 
 	/**
-	 * @param cpf
-	 * @param fornecedor
-	 * @return
+	 * Método responsável pela exibição das compras de determinada conta.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor fornecedor do produto
+	 * 
+	 * @return Retorna um representação textual de todas as compras de determinada conta.
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o cpf informado seja considerado inválido.
+	 * @throws NullPointerException Essa exceção é gerada caso o cliente não seja encontrado no sistema.
 	 */
 	public String exibirContas(String cpf, String fornecedor) {
 		
@@ -252,8 +271,14 @@ public class ControllerClienteSaga {
 	}
 
 	/**
-	 * @param cpf
-	 * @return
+	 * Este método exibe todas as contas de um cliente, de todos os fornecedores.
+	 * 
+	 * @param cpf cpf do cliente
+	 * 
+	 * @return Retorna uma representação textual de todas as contas de determinado cliente.
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o cpf informado seja considerado inválido.
+	 * @throws NullPointerException Essa exceção é gerada caso o cliente não seja encontrado no sistema.
 	 */
 	public String exibirContas(String cpf) {
 		
@@ -268,6 +293,16 @@ public class ControllerClienteSaga {
 			throw new NullPointerException("Erro ao exibir contas do cliente: cliente nao existe.");
 	}
 
+	/**
+	 * Esse método é responsável pela quitação de um débito de uma conta, onde o processo consiste em deletar a 
+	 * conta do sistema, excluindo assim, todos os seus dados.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor fornecedor do produto
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o cpf seja nulo ou inválido.
+	 * @throws NullPointerException Essa exceção é gerada caso o cliente não seja encontrado no sistema.
+	 */
 	public void quitarDebito(String cpf, String fornecedor) {
 		
 		if(cpf == null || cpf.trim().isEmpty())
@@ -283,6 +318,14 @@ public class ControllerClienteSaga {
 			throw new NullPointerException("Erro no pagamento de conta: cliente nao existe.");
 	}
 
+	/**
+	 * Método responsável por setar o comparador utilizado na ordenação das compras do sistema.
+	 * 
+	 * @param criterio criteiro de ordenação desejado
+	 * 
+	 * @throws IllegalArgumentException Essa exceção é gerada caso o critério seja vazio, nulo ou não esteja disponível 
+	 * no sistema.
+	 */
 	public void ordenarPor(String criterio) {
 		
 		if(criterio == null || criterio.trim().isEmpty())
@@ -302,6 +345,14 @@ public class ControllerClienteSaga {
 			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
 	}
 
+	/**
+	 * Método que lista todas as compras cadastradas no sistema.
+	 * 
+	 * @return Retorna uma representação de todas as compras cadastradas no sistema.
+	 * 
+	 * @throws NullPointerException Exceção gerada caso o comparador não esteja instanciado 
+	 * corretamente.
+	 */
 	public String listarCompras() {
 		
 		Set<String> chaves = clientes.keySet();
@@ -328,17 +379,19 @@ public class ControllerClienteSaga {
 	}
 
 	/**
-	 * @param listaCompras
-	 * @return
+	 * Método que lista todas as compras pelas suas datas.
+	 * 
+	 * @param listaCompras Coleção com todas as compras já ordenadas.
+	 * 
+	 * @return Retorna um representação de todas as compras, ordenadas pelas datas.
 	 */
 	private String listarPorData(ArrayList<Compra> listaCompras) {
 		
 		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getDataCompra(),listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getDescricaoProduto());
-		//System.out.println(retorno);
+
 		for (int i = 1; i < listaCompras.size(); i++) {
 			
 			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto());
-			//System.out.print(" | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getDataCompra(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto()) + "\n");
 
 		}
 		
@@ -346,33 +399,40 @@ public class ControllerClienteSaga {
 	}
 
 	/**
-	 * @param listaCompras
-	 * @return
+	 * Método que lista todas as compras pelos seus fornecedores.
+	 * 
+	 * @param listaCompras Coleção com todas as compras já ordenadas.
+	 * 
+	 * @return Retorna uma representação de todas as compras, ordenadas pelos nomes dos fornecedores.
 	 */
 	private String listarPorFornecedor(ArrayList<Compra> listaCompras) {
 		
 		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getDescricaoProduto(),listaCompras.get(0).getDataCompra());
-		
+
 		for (int i = 1; i < listaCompras.size(); i++) {
 			
 			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getDescricaoProduto(),listaCompras.get(i).getDataCompra());
+
 		}
 		
 		return retorno;
 	}
 
 	/**
-	 * @param listaCompras
-	 * @return
+	 * Método que lista todas as compras pelos seus clientes.
+	 * 
+	 * @param listaCompras Coleção com todas as compras já ordenadas.
+	 * 
+	 * @return Retorna uma representação de todas as compras, ordenadas pelos nomes de seus clientes.
 	 */
 	private String listarPorCliente(ArrayList<Compra> listaCompras) {
 		
 		String retorno = String.format("%s, %s, %s, %s",listaCompras.get(0).getNomeCliente(),listaCompras.get(0).getNomeFornecedor(),listaCompras.get(0).getDescricaoProduto(),listaCompras.get(0).getDataCompra());
-		//System.out.println(retorno);
+
 		for (int i = 1; i < listaCompras.size(); i++) {
 			
 			retorno += " | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto(),listaCompras.get(i).getDataCompra());
-			//System.out.println(" | " + String.format("%s, %s, %s, %s",listaCompras.get(i).getNomeCliente(),listaCompras.get(i).getNomeFornecedor(),listaCompras.get(i).getDescricaoProduto(),listaCompras.get(i).getDataCompra()) + "\n");
+
 		}
 		
 		return retorno;

@@ -46,10 +46,11 @@ public class Compra {
 	 * criar um novo objeto do tipo conta.
 	 * 
 	 * @param nomeCliente nome do cliente
-	 * @param descricaoProduto descrição do produto
+	 * @param nomeFornecedor nome do fornecedor
 	 * @param dataCompra deta da compra
+	 * @param nomeProduto nome do produto
+	 * @param descricaoProduto descrição do produto
 	 * @param preco preço da compra
-	 * @param produto produto da compra
 	 */
 	public Compra(String nomeCliente,String nomeFornecedor,String dataCompra,String nomeProduto,String descricaoProduto, double preco) {
 		

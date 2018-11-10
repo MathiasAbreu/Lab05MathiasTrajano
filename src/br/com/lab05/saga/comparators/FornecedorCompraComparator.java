@@ -25,12 +25,18 @@ public class FornecedorCompraComparator implements Comparator<Compra> {
 		
 		int posicao = compra01.getNomeFornecedor().compareTo(compra02.getNomeFornecedor());
 		
-		if(posicao > 0)
-			return 1;
-		if(posicao < 0)
-			return -1;
+		if(posicao == 0) {
+			
+			posicao = compra01.getNomeCliente().compareTo(compra02.getNomeCliente());
+			
+			if(posicao == 0) {
+				return compra01.getDescricaoProduto().compareTo(compra02.getDescricaoProduto());
+			}
+			
+			return posicao;
+		}
 		
-		return 0;
+		return posicao;
 	}
 
 }

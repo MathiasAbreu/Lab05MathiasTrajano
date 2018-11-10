@@ -28,11 +28,23 @@ public class DataCompraComparator implements Comparator<Compra> {
 		
 		int posicao = (data01[2] + data01[1] + data01[0]).compareTo(data02[2] + data02[1] + data02[0]);
 		
-		if(posicao > 0)
-			return 1;
-		if(posicao < 0)
-			return -1;
+		if(posicao == 0) {
+			
+			posicao = compra01.getNomeCliente().compareTo(compra02.getNomeCliente());
+			
+			if(posicao == 0) {
+				
+				posicao = compra01.getNomeFornecedor().compareTo(compra02.getNomeFornecedor());
+				
+				if(posicao == 0)
+					return compra01.getDescricaoProduto().compareTo(compra02.getDescricaoProduto());
+				
+				return posicao;
+			}
+			
+			return posicao;
+		}
 		
-		return 0;
+		return posicao;
 	}
 }

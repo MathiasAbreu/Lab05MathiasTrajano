@@ -1,8 +1,10 @@
 package br.com.lab05.saga.facade;
 
+import br.com.lab05.saga.controller.ControllerFornecedorSaga;
 import br.com.lab05.saga.controller.ControllerSaga;
 import br.com.lab05.saga.model.Cliente;
 import br.com.lab05.saga.model.Combo;
+import br.com.lab05.saga.model.Compra;
 import br.com.lab05.saga.model.Fornecedor;
 import br.com.lab05.saga.model.ProdutoSimples;
 import easyaccept.EasyAccept;
@@ -93,6 +95,15 @@ public class SagaFacade {
 		
 	}
 	
+	/**
+	 * Método que cadastra uma nova {@link Compra}.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor fornecedor do produto
+	 * @param data data da compra
+	 * @param nome_prod nome do produto
+	 * @param desc_prod descricao do produto
+	 */
 	public void adicionaCompra(String cpf,String fornecedor,String data,String nome_prod,String desc_prod) {
 		
 		controlerSaga.adicionarConta(cpf,fornecedor,data,nome_prod,desc_prod);
@@ -283,36 +294,80 @@ public class SagaFacade {
 		return controlerSaga.removerProduto(nome,descricao,fornecedor);
 	}
 	
+	/**
+	 * Método que retorna o debito de uma determinada conta.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor nome do fornecedor
+	 * 
+	 * @return Retorna o débito total da conta
+	 */
 	public String getDebito(String cpf,String fornecedor) {
 		
 		return controlerSaga.getDebito(cpf,fornecedor);
 	}
 	
+	/**
+	 * Método que exibe as compras de uma determinada conta.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor nome do fornecedor
+	 * 
+	 * @return Retorna uma representação com todas as compras.
+	 */
 	public String exibeContas(String cpf,String fornecedor) {
 		
 		return controlerSaga.exibirContas(cpf,fornecedor);
 	}
 	
+	/**
+	 * Método que exibe todas as compras de um cliente específico.
+	 * 
+	 * @param cpf cpf do cliente
+	 * 
+	 * @return Retorna uma representação de todas as compras de um cliente.
+	 */
 	public String exibeContasClientes(String cpf) {
 		
 		return controlerSaga.exibirContas(cpf);
 	}
 	
+	/**
+	 * Método que quita os debitos de uma determinada conta.
+	 * 
+	 * @param cpf cpf do cliente
+	 * @param fornecedor fornecedor dos produtos
+	 */
 	public void realizaPagamento(String cpf,String fornecedor) {
 		
 		controlerSaga.quitarDebito(cpf,fornecedor);
 	}
 	
+	/**
+	 * Método que lista todas as compras do sistema.
+	 * 
+	 * @return Retorna uma representação com todas as compras.
+	 */
 	public String listarCompras() {
 		
 		return controlerSaga.listarCompras();
 	}
 	
+	/**
+	 * Método que seleciona a maneira como as contas devem ser ordenadas.
+	 * 
+	 * @param criterio criterio de ordenação
+	 */
 	public void ordenaPor(String criterio) {
 		
 		controlerSaga.ordenarPor(criterio);
 	}
 	
+	/**
+	 * Método main principal.
+	 * 
+	 * @param args argumentos do EasyAccept
+	 */
 	public static void main(String[] args) {
 		
 		args = new String[] {"br.com.lab05.saga.facade.SagaFacade",
