@@ -133,7 +133,7 @@ class ControllerClienteSagaTests {
 		
 		controle.cadastrarCliente("10987654321","Matheus","matheus.trajano","SACC");
 		
-		assertEquals("Matheus - SACC - matheus.trajano | Mathias - LSD - mathias.trajano",controle.listarClientes());
+		assertEquals("Klaywert - LCC03 - klay.souza | Matheus - SACC - matheus.trajano | Mathias - LSD - mathias.trajano | Wesley - LugaNenhum - wesley.mateus",controle.listarClientes());
 	}
 	
 	@Test
@@ -142,6 +142,9 @@ class ControllerClienteSagaTests {
 		NullPointerException npe = assertThrows(NullPointerException.class,() -> {
 			
 			controle.removerCliente("12345678901");
+			controle.removerCliente("13570493267");
+			controle.removerCliente("09876543211");
+			
 			controle.listarClientes();
 		});
 		
@@ -190,7 +193,7 @@ class ControllerClienteSagaTests {
 		assertEquals("Klaywert, Dona Inês, X-Infarto, 18/01/1999 | Mathias, Matheus, Arroz Branco, 11/10/2018 | Mathias, Seu Olavo, Sanduiche de Frango, 12/12/2008 | Wesley, Matheus, Arroz Branco, 15/11/2018",controle.listarCompras());
 		
 		controle.ordenarPor("Fornecedor");
-		assertEquals("Dona Inês, Klaywert, X-Infarto, 18/01/1999 | Matheus, Wesley, Arroz Branco, 15/11/2018 | Matheus, Mathias, Arroz Branco, 11/10/2018 | Seu Olavo, Mathias, Sanduiche de Frango, 12/12/2008",controle.listarCompras());
+		assertEquals("Dona Inês, Klaywert, X-Infarto, 18/01/1999 | Matheus, Mathias, Arroz Branco, 11/10/2018 | Matheus, Wesley, Arroz Branco, 15/11/2018 | Seu Olavo, Mathias, Sanduiche de Frango, 12/12/2008",controle.listarCompras());
 		
 		controle.ordenarPor("Data");
 		assertEquals("18/01/1999, Klaywert, Dona Inês, X-Infarto | 12/12/2008, Mathias, Seu Olavo, Sanduiche de Frango | 11/10/2018, Mathias, Matheus, Arroz Branco | 15/11/2018, Wesley, Matheus, Arroz Branco",controle.listarCompras());

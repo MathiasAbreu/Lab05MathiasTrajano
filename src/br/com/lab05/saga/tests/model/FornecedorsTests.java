@@ -164,7 +164,7 @@ class FornecedorsTests {
 
 		});
 		
-		assertEquals("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.",iae.getMessage());
+		assertEquals("descricao nao pode ser vazia ou nula.",iae.getMessage());
 	}
 	
 	@Test
@@ -175,7 +175,7 @@ class FornecedorsTests {
 			fornecedor.buscarProduto("Feijão","Feijão carioca");
 		});
 		
-		assertEquals("Erro na exibicao de produto: produto nao existe.",npe.getMessage());
+		assertEquals("produto nao existe.",npe.getMessage());
 	}
 	
 	@Test
@@ -187,7 +187,7 @@ class FornecedorsTests {
 			fornecedor.buscarProduto("ArrozBranco","Pacote de arroz");
 		});
 		
-		assertEquals("Erro na exibicao de produto: produto nao existe.",npe.getMessage());
+		assertEquals("produto nao existe.",npe.getMessage());
 		
 	}
 	
